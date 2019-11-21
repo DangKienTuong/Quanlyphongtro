@@ -5,17 +5,139 @@
  */
 package phongtro.ui;
 
+import java.awt.HeadlessException;
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
+import phongtro.dao.DichvuDAO;
+import phongtro.helper.DialogHelper;
+import phongtro.model.Dichvu;
+
 /**
  *
  * @author Tường Ngao Tạng
  */
-public class DichVu extends javax.swing.JFrame {
+public class DichVuUI extends javax.swing.JFrame {
 
     /**
      * Creates new form DichVu
      */
-    public DichVu() {
+    public DichVuUI() {
         initComponents();
+        init();
+    }
+    int index = 0;
+    DichvuDAO dao = new DichvuDAO();
+    
+    void init() {
+        setLocationRelativeTo(null);
+    }
+    
+    void load() {
+        DefaultTableModel model = (DefaultTableModel) tblDichVu.getModel();
+        model.setRowCount(0);
+        try {
+            String keyword = txtTimKiem.getText();
+            List<Dichvu> list = dao.selectByKeyword(keyword);
+            for (Dichvu dv : list) {
+                Object[] row = {
+                    dv.getMaDichVu(),
+                    dv.getTenDichVu(),
+                    dv.getDonGia(),
+                    dv.getDonVi(),
+                    dv.getMoTa()
+                };
+                model.addRow(row);
+            }
+        } catch (Exception e) {
+            DialogHelper.alert(this, "Lỗi truy vấn dữ liệu!");
+        }
+    }
+    
+    void insert() {
+        Dichvu model = getModel();
+        try {
+            dao.insert(model);
+            this.load();
+            this.clear();
+            DialogHelper.alert(this, "Thêm mới thành công!");
+        } catch (Exception e) {
+            DialogHelper.alert(this, "Thêm mới thất bại!");
+        }
+    }
+    
+    void update() {
+        setStatus(false);
+        Dichvu model = getModel();
+        try {
+            dao.update(model);
+            this.load();
+            DialogHelper.alert(this, "Cập nhật thành công!");
+        } catch (Exception e) {
+            e.printStackTrace();
+            DialogHelper.alert(this, "Cập nhật thất bại!");
+        }
+    }
+    
+    void delete() {
+        if (DialogHelper.confirm(this, "Bạn thực sự muốn xóa?")) {
+            String user = txtMaDichVu.getText();
+            try {
+                dao.delete(user);
+                this.load();
+                this.clear();
+                DialogHelper.alert(this, "Xóa thành công!");
+            } catch (HeadlessException e) {
+                DialogHelper.alert(this, "Xóa thất bại!");
+            }
+        }
+    }
+    
+    void clear() {
+        Dichvu model = new Dichvu();
+        this.setModel(model);
+        setStatus(true);
+        txtDonGia.setText("");
+    }
+    
+    void edit() {
+        try {
+            String user = (String) tblDichVu.getValueAt(this.index, 0);
+            Dichvu model = dao.findById(user);
+            if (model != null) {
+                this.setModel(model);
+                this.setStatus(false);
+            }
+        } catch (Exception e) {
+            DialogHelper.alert(this, "Lỗi truy vấn dữ liệu!");
+        }
+    }
+    
+    void setModel(Dichvu model) {
+        txtMaDichVu.setText(model.getMaDichVu());
+        txtTenDichVu.setText(model.getTenDichVu());
+        txtDonGia.setText(model.getDonGia() + "");
+        txtDonVi.setText(model.getDonVi());
+        txtMoTa.setText(model.getMoTa());
+    }
+    
+    Dichvu getModel() {
+        Dichvu model = new Dichvu();
+        model.setMaDichVu(txtMaDichVu.getText());
+        model.setTenDichVu(txtTenDichVu.getText());
+        model.setDonGia(Double.parseDouble(txtDonGia.getText()));
+        model.setDonVi(txtDonVi.getText());
+        model.setMoTa(txtMoTa.getText());
+        return model;
+    }
+    
+    void setStatus(boolean insertable) {
+        txtMaDichVu.setEditable(insertable);
+        boolean first = this.index > 0;
+        boolean last = this.index < tblDichVu.getRowCount() - 1;
+        btnLongPre.setEnabled(!insertable && first);
+        btnPre.setEnabled(!insertable && first);
+        btnNext.setEnabled(!insertable && last);
+        btnLongNext.setEnabled(!insertable && last);
     }
 
     /**
@@ -54,6 +176,11 @@ public class DichVu extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
 
         txtMoTa.setColumns(20);
         txtMoTa.setRows(5);
@@ -61,15 +188,35 @@ public class DichVu extends javax.swing.JFrame {
 
         btnAdd.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         btnAdd.setText("Thêm");
+        btnAdd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAddActionPerformed(evt);
+            }
+        });
 
         btnEdit.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         btnEdit.setText("Sửa");
+        btnEdit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEditActionPerformed(evt);
+            }
+        });
 
         btnDel.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         btnDel.setText("Xóa");
+        btnDel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDelActionPerformed(evt);
+            }
+        });
 
         btnNew.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         btnNew.setText("Mới");
+        btnNew.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnNewActionPerformed(evt);
+            }
+        });
 
         tblDichVu.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         tblDichVu.setModel(new javax.swing.table.DefaultTableModel(
@@ -82,20 +229,53 @@ public class DichVu extends javax.swing.JFrame {
             new String [] {
                 "Ma Dich Vu", "Ten Dich Vu", "Don Gia", "Don Vi", "Mo Ta"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        tblDichVu.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblDichVuMouseClicked(evt);
+            }
+        });
         jScrollPane2.setViewportView(tblDichVu);
 
         btnLongPre.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         btnLongPre.setText("|<");
+        btnLongPre.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLongPreActionPerformed(evt);
+            }
+        });
 
         btnPre.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         btnPre.setText("<");
+        btnPre.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPreActionPerformed(evt);
+            }
+        });
 
         btnNext.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         btnNext.setText(">");
+        btnNext.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnNextActionPerformed(evt);
+            }
+        });
 
         btnLongNext.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         btnLongNext.setText(">|");
+        btnLongNext.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLongNextActionPerformed(evt);
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(204, 0, 0));
@@ -104,6 +284,11 @@ public class DichVu extends javax.swing.JFrame {
         jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         btnTimKiem.setText("Tìm Kiếm");
+        btnTimKiem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTimKiemActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -236,6 +421,82 @@ public class DichVu extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        // TODO add your handling code here:
+        this.load();
+        this.setStatus(true);
+    }//GEN-LAST:event_formWindowOpened
+    
+    private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
+        // TODO add your handling code here:
+        try {
+            Double.parseDouble(txtDonGia.getText());
+            insert();
+        } catch (Exception e) {
+            DialogHelper.alert(this, "Số tiền không hợp lệ");
+        }
+    }//GEN-LAST:event_btnAddActionPerformed
+    
+    private void btnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditActionPerformed
+        // TODO add your handling code here:
+        try {
+            Double.parseDouble(txtDonGia.getText());
+            update();
+        } catch (Exception e) {
+            DialogHelper.alert(this, "Số tiền không hợp lệ");
+        }
+    }//GEN-LAST:event_btnEditActionPerformed
+    
+    private void btnDelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDelActionPerformed
+        // TODO add your handling code here:
+        delete();
+    }//GEN-LAST:event_btnDelActionPerformed
+    
+    private void btnNewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNewActionPerformed
+        // TODO add your handling code here:
+        clear();
+    }//GEN-LAST:event_btnNewActionPerformed
+    
+    private void btnLongPreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLongPreActionPerformed
+        // TODO add your handling code here:
+        this.index = 0;
+        this.edit();
+    }//GEN-LAST:event_btnLongPreActionPerformed
+    
+    private void tblDichVuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblDichVuMouseClicked
+        // TODO add your handling code here:
+        if (evt.getClickCount() == 2) {
+            this.index = tblDichVu.rowAtPoint(evt.getPoint());
+            if (this.index >= 0) {
+                this.edit();
+            }
+        }
+    }//GEN-LAST:event_tblDichVuMouseClicked
+    
+    private void btnTimKiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTimKiemActionPerformed
+        // TODO add your handling code here:
+        this.load();
+        this.clear();
+    }//GEN-LAST:event_btnTimKiemActionPerformed
+    
+    private void btnPreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPreActionPerformed
+        // TODO add your handling code here:
+        this.index--;
+        this.edit();
+    }//GEN-LAST:event_btnPreActionPerformed
+    
+    private void btnNextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNextActionPerformed
+        // TODO add your handling code here:
+        this.index++;
+        this.edit();
+    }//GEN-LAST:event_btnNextActionPerformed
+    
+    private void btnLongNextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLongNextActionPerformed
+        // TODO add your handling code here:
+        this.index = tblDichVu.getRowCount() - 1;
+        this.edit();
+    }//GEN-LAST:event_btnLongNextActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -253,20 +514,21 @@ public class DichVu extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(DichVu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(DichVuUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(DichVu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(DichVuUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(DichVu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(DichVuUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(DichVu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(DichVuUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new DichVu().setVisible(true);
+                new DichVuUI().setVisible(true);
             }
         });
     }

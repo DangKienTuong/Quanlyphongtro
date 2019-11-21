@@ -9,6 +9,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import phongtro.helper.DateHelper;
 import phongtro.helper.JdbcHelper;
 import phongtro.model.Hopdong;
 
@@ -26,8 +27,8 @@ public class HopdongDAO {
                 model.getNguoiDaiDien(),
                 model.getSdt(),
                 model.getTienDatCoc(),
-                model.getNgayDatCoc(),
-                model.getNgayHetHan()
+                DateHelper.toString(model.getNgayDatCoc()),
+                DateHelper.toString(model.getNgayHetHan())
         );
     }
 
@@ -38,8 +39,8 @@ public class HopdongDAO {
                 model.getNguoiDaiDien(),
                 model.getSdt(),
                 model.getTienDatCoc(),
-                model.getNgayDatCoc(),
-                model.getNgayHetHan(),
+                DateHelper.toString(model.getNgayDatCoc()),
+                DateHelper.toString(model.getNgayHetHan()),
                 model.getMaHopDong()
         );
 

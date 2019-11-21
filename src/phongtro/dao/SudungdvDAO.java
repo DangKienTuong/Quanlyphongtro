@@ -51,9 +51,9 @@ public class SudungdvDAO {
         return select(sql, "%" + keyword + "%");
     }
 
-    public Sudungdv findById(String Maphong) {
+    public Sudungdv findById(String Masddv) {
         String sql = "SELECT * FROM Sudungdv WHERE Masddv=?";
-        List<Sudungdv> list = select(sql, Maphong);
+        List<Sudungdv> list = select(sql, Masddv);
         return list.size() > 0 ? list.get(0) : null;
     }
 

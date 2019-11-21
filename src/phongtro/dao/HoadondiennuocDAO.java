@@ -9,6 +9,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import phongtro.helper.DateHelper;
 import phongtro.helper.JdbcHelper;
 import phongtro.model.Dichvu;
 import phongtro.model.Hoadondiennuoc;
@@ -24,7 +25,7 @@ public class HoadondiennuocDAO {
         JdbcHelper.executeUpdate(sql,
                 model.getMaHoaDon(),
                 model.getMaPhong(),
-                model.getNgayLap(),
+                DateHelper.toString(model.getNgayLap()),
                 model.getChiSoDau(),
                 model.getChiSoCuoi()
         );
@@ -34,7 +35,7 @@ public class HoadondiennuocDAO {
         String sql = "UPDATE Hoadondiennuoc SET  Maphong=?, Ngaylap=?, Chisodau=?, Chisocuoi=? WHERE Mahoadon=?";
         JdbcHelper.executeUpdate(sql,
                 model.getMaPhong(),
-                model.getNgayLap(),
+                DateHelper.toString(model.getNgayLap()),
                 model.getChiSoDau(),
                 model.getChiSoCuoi(),
                 model.getMaHoaDon()

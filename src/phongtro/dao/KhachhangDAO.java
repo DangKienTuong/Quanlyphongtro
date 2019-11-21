@@ -9,6 +9,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import phongtro.helper.DateHelper;
 import phongtro.helper.JdbcHelper;
 import phongtro.model.Khachhang;
 
@@ -24,7 +25,7 @@ public class KhachhangDAO {
                 model.getMaKhachHang(),
                 model.getMaPhong(),
                 model.getTen(),
-                model.getNamSinh(),
+                DateHelper.toString(model.getNamSinh()),
                 model.getCmnd(),
                 model.getDiaChi(),
                 model.getNgheNghiep(),
@@ -38,7 +39,7 @@ public class KhachhangDAO {
         JdbcHelper.executeUpdate(sql,
                 model.getMaPhong(),
                 model.getTen(),
-                model.getNamSinh(),
+                DateHelper.toString(model.getNamSinh()),
                 model.getCmnd(),
                 model.getDiaChi(),
                 model.getNgheNghiep(),
@@ -90,15 +91,15 @@ public class KhachhangDAO {
 
     private Khachhang readFromResultSet(ResultSet rs) throws SQLException {
         Khachhang model = new Khachhang();
-        model.setMaKhachHang(rs.getString("Maphong"));
+        model.setMaKhachHang(rs.getString("Makhachhang"));
         model.setMaPhong(rs.getString("Maphong"));
-        model.setTen(rs.getString("Maphong"));
-        model.setNamSinh(rs.getDate("Maphong"));
-        model.setCmnd(rs.getString("Maphong"));
-        model.setDiaChi(rs.getString("Maphong"));
-        model.setNgheNghiep(rs.getString("Maphong"));
-        model.setSdt(rs.getString("Maphong"));
-        model.setHinh(rs.getBytes("Maphong"));
+        model.setTen(rs.getString("Ten"));
+        model.setNamSinh(rs.getDate("Namsinh"));
+        model.setCmnd(rs.getString("Cmnd"));
+        model.setDiaChi(rs.getString("Diachi"));
+        model.setNgheNghiep(rs.getString("Nghenghiep"));
+        model.setSdt(rs.getString("Sdt"));
+        model.setHinh(rs.getBytes("Hinh"));
         return model;
     }
 }

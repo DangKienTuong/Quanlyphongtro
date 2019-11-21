@@ -1,17 +1,16 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
 <Form version="1.5" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
-  <NonVisualComponents>
-    <Component class="datechooser.beans.DateChooserDialog" name="dateChooserDialog1">
-    </Component>
-  </NonVisualComponents>
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="3"/>
   </Properties>
   <SyntheticProperties>
     <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
-    <SyntheticProperty name="generateCenter" type="boolean" value="true"/>
+    <SyntheticProperty name="generateCenter" type="boolean" value="false"/>
   </SyntheticProperties>
+  <Events>
+    <EventHandler event="windowOpened" listener="java.awt.event.WindowListener" parameters="java.awt.event.WindowEvent" handler="formWindowOpened"/>
+  </Events>
   <AuxValues>
     <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="0"/>
     <AuxValue name="FormSettings_autoSetComponentName" type="java.lang.Boolean" value="false"/>
@@ -27,14 +26,11 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" attributes="0">
+          <Group type="102" alignment="0" attributes="0">
+              <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="1" attributes="0">
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jScrollPane2" pref="580" max="32767" attributes="0"/>
-                  </Group>
+                  <Component id="jScrollPane2" alignment="1" pref="606" max="32767" attributes="0"/>
                   <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace max="-2" attributes="0"/>
                       <Component id="btnAdd" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="btnEdit" min="-2" max="-2" attributes="0"/>
@@ -54,17 +50,17 @@
               </Group>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
-          <Group type="102" attributes="0">
+          <Group type="102" alignment="0" attributes="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="48" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
-                          <Group type="102" attributes="0">
+                          <Component id="jLabel5" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Group type="102" alignment="0" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="103" groupAlignment="1" attributes="0">
-                                      <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
+                                  <Group type="103" alignment="0" groupAlignment="1" attributes="0">
+                                      <Component id="jLabel3" alignment="1" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jLabel2" alignment="1" min="-2" max="-2" attributes="0"/>
                                   </Group>
                                   <Component id="jLabel6" alignment="1" min="-2" max="-2" attributes="0"/>
                                   <Component id="jLabel4" alignment="1" min="-2" max="-2" attributes="0"/>
@@ -75,8 +71,8 @@
                                   <Component id="txtTenKhoanChi" alignment="1" max="32767" attributes="0"/>
                                   <Component id="txtMaChi" alignment="1" max="32767" attributes="0"/>
                                   <Component id="jPanel1" alignment="1" max="32767" attributes="0"/>
-                                  <Component id="txtSoTien" max="32767" attributes="0"/>
-                                  <Component id="txtNgayChi" max="32767" attributes="0"/>
+                                  <Component id="txtSoTien" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="txtNgayChi" alignment="0" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>
@@ -110,13 +106,13 @@
               </Group>
               <EmptySpace max="32767" attributes="0"/>
               <Group type="103" groupAlignment="1" attributes="0">
-                  <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jLabel3" alignment="1" min="-2" max="-2" attributes="0"/>
                   <Component id="txtTenKhoanChi" alignment="1" min="-2" pref="24" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="1" attributes="0">
-                  <Component id="txtNgayChi" min="-2" max="-2" attributes="0"/>
-                  <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
+                  <Component id="txtNgayChi" alignment="1" min="-2" max="-2" attributes="0"/>
+                  <Component id="jLabel4" alignment="1" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
@@ -136,16 +132,18 @@
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Component id="jScrollPane2" min="-2" pref="93" max="-2" attributes="0"/>
               <EmptySpace max="32767" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="btnAdd" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="btnEdit" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="btnDel" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="btnNew" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Group type="103" alignment="3" groupAlignment="3" attributes="0">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="103" alignment="0" groupAlignment="3" attributes="0">
                       <Component id="btnLongPre" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="btnPre" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="btnNext" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="btnLongNext" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="103" alignment="0" groupAlignment="3" attributes="0">
+                      <Component id="btnAdd" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="btnEdit" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="btnDel" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="btnNew" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace min="-2" pref="44" max="-2" attributes="0"/>
@@ -183,21 +181,33 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Th&#xea;m"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAddActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="btnEdit">
       <Properties>
         <Property name="text" type="java.lang.String" value="S&#x1eed;a"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnEditActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="btnDel">
       <Properties>
         <Property name="text" type="java.lang.String" value="X&#xf3;a"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnDelActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="btnNew">
       <Properties>
         <Property name="text" type="java.lang.String" value="M&#x1edb;i"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnNewActionPerformed"/>
+      </Events>
     </Component>
     <Container class="javax.swing.JScrollPane" name="jScrollPane2">
       <AuxValues>
@@ -210,12 +220,12 @@
           <Properties>
             <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
               <Table columnCount="6" rowCount="4">
-                <Column editable="true" title="Machi" type="java.lang.Object"/>
-                <Column editable="true" title="Ten Khoan Chi" type="java.lang.Object"/>
-                <Column editable="true" title="Loai Khoan Chi" type="java.lang.Object"/>
-                <Column editable="true" title="So Tien" type="java.lang.Object"/>
-                <Column editable="true" title="Ngay Chi" type="java.lang.Object"/>
-                <Column editable="true" title="Mo Ta" type="java.lang.Object"/>
+                <Column editable="false" title="Machi" type="java.lang.Object"/>
+                <Column editable="false" title="Ten Khoan Chi" type="java.lang.Object"/>
+                <Column editable="false" title="Loai Khoan Chi" type="java.lang.Object"/>
+                <Column editable="false" title="So Tien" type="java.lang.Object"/>
+                <Column editable="false" title="Ngay Chi" type="java.lang.Object"/>
+                <Column editable="false" title="Mo Ta" type="java.lang.Object"/>
               </Table>
             </Property>
             <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
@@ -256,6 +266,9 @@
               <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="tblChiMouseClicked"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
@@ -263,21 +276,33 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="&lt;"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnPreActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="btnLongPre">
       <Properties>
         <Property name="text" type="java.lang.String" value="|&lt;"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnLongPreActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="btnNext">
       <Properties>
         <Property name="text" type="java.lang.String" value="&gt;"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnNextActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="btnLongNext">
       <Properties>
         <Property name="text" type="java.lang.String" value="&gt;|"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnLongNextActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel1">
       <Properties>
@@ -331,6 +356,9 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="T&#xec;m Ki&#x1ebf;m"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnTimKiemActionPerformed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>

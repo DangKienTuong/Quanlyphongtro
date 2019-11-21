@@ -5,17 +5,142 @@
  */
 package phongtro.ui;
 
+import java.awt.HeadlessException;
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
+import phongtro.dao.ChiDAO;
+import phongtro.helper.DialogHelper;
+import phongtro.model.Chi;
+
 /**
  *
  * @author Tường Ngao Tạng
  */
-public class Chi extends javax.swing.JFrame {
+public class ChiUI extends javax.swing.JFrame {
 
     /**
-     * Creates new form Chi
+     * Creates new form Cackhoanchi
      */
-    public Chi() {
+    public ChiUI() {
         initComponents();
+        init();
+    }
+    int index = 0;
+    ChiDAO dao = new ChiDAO();
+
+    void init() {
+        setLocationRelativeTo(null);
+    }
+
+    void load() {
+        DefaultTableModel model = (DefaultTableModel) tblChi.getModel();
+        model.setRowCount(0);
+        try {
+            String keyword = txtTimKiem.getText();
+            List<Chi> list = dao.selectByKeyword(keyword);
+            for (Chi chi : list) {
+                Object[] row = {
+                    chi.getMaChi(),
+                    chi.getTenKhoanChi(),
+                    chi.getLoaiKhoanChi(),
+                    chi.getSoTien(),
+                    chi.getNgayChi(),
+                    chi.getMoTa()
+                };
+                model.addRow(row);
+            }
+        } catch (Exception e) {
+            DialogHelper.alert(this, "Lỗi truy vấn dữ liệu!");
+        }
+    }
+
+    void insert() {
+        Chi model = getModel();
+        try {
+            dao.insert(model);
+            this.load();
+            this.clear();
+            DialogHelper.alert(this, "Thêm mới thành công!");
+        } catch (Exception e) {
+            DialogHelper.alert(this, "Thêm mới thất bại!");
+        }
+    }
+
+    void update() {
+        setStatus(false);
+        Chi model = getModel();
+        try {
+            dao.update(model);
+            this.load();
+            DialogHelper.alert(this, "Cập nhật thành công!");
+        } catch (Exception e) {
+            e.printStackTrace();
+            DialogHelper.alert(this, "Cập nhật thất bại!");
+        }
+    }
+
+    void delete() {
+        if (DialogHelper.confirm(this, "Bạn thực sự muốn xóa?")) {
+            String user = txtMaChi.getText();
+            try {
+                dao.delete(user);
+                this.load();
+                this.clear();
+                DialogHelper.alert(this, "Xóa thành công!");
+            } catch (HeadlessException e) {
+                DialogHelper.alert(this, "Xóa thất bại!");
+            }
+        }
+    }
+
+    void clear() {
+        Chi model = new Chi();
+        this.setModel(model);
+        setStatus(true);
+        txtSoTien.setText("");
+    }
+
+    void edit() {
+        try {
+            String user = (String) tblChi.getValueAt(this.index, 0);
+            Chi model = dao.findById(user);
+            if (model != null) {
+                this.setModel(model);
+                this.setStatus(false);
+            }
+        } catch (Exception e) {
+            DialogHelper.alert(this, "Lỗi truy vấn dữ liệu!");
+        }
+    }
+
+    void setModel(Chi model) {
+        txtMaChi.setText(model.getMaChi());
+        txtTenKhoanChi.setText(model.getTenKhoanChi());
+        txtLoaiKhoanChi.setText(model.getLoaiKhoanChi());
+        txtSoTien.setText(model.getSoTien() + "");
+        txtNgayChi.setDate(model.getNgayChi());
+        txtMoTa.setText(model.getMoTa());
+    }
+
+    Chi getModel() {
+        Chi model = new Chi();
+        model.setMaChi(txtMaChi.getText());
+        model.setTenKhoanChi(txtTenKhoanChi.getText());
+        model.setLoaiKhoanChi(txtLoaiKhoanChi.getText());
+        model.setSoTien(Double.parseDouble(txtSoTien.getText()));
+        model.setNgayChi(txtNgayChi.getDate());
+        model.setMoTa(txtMoTa.getText());
+        return model;
+    }
+
+    void setStatus(boolean insertable) {
+        txtMaChi.setEditable(insertable);
+        boolean first = this.index > 0;
+        boolean last = this.index < tblChi.getRowCount() - 1;
+        btnLongPre.setEnabled(!insertable && first);
+        btnPre.setEnabled(!insertable && first);
+        btnNext.setEnabled(!insertable && last);
+        btnLongNext.setEnabled(!insertable && last);
     }
 
     /**
@@ -27,7 +152,6 @@ public class Chi extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        dateChooserDialog1 = new datechooser.beans.DateChooserDialog();
         txtMaChi = new javax.swing.JTextField();
         txtTenKhoanChi = new javax.swing.JTextField();
         txtLoaiKhoanChi = new javax.swing.JTextField();
@@ -57,18 +181,43 @@ public class Chi extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
 
         txtMoTa.setColumns(20);
         txtMoTa.setRows(5);
         jScrollPane1.setViewportView(txtMoTa);
 
         btnAdd.setText("Thêm");
+        btnAdd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAddActionPerformed(evt);
+            }
+        });
 
         btnEdit.setText("Sửa");
+        btnEdit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEditActionPerformed(evt);
+            }
+        });
 
         btnDel.setText("Xóa");
+        btnDel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDelActionPerformed(evt);
+            }
+        });
 
         btnNew.setText("Mới");
+        btnNew.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnNewActionPerformed(evt);
+            }
+        });
 
         tblChi.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -80,16 +229,49 @@ public class Chi extends javax.swing.JFrame {
             new String [] {
                 "Machi", "Ten Khoan Chi", "Loai Khoan Chi", "So Tien", "Ngay Chi", "Mo Ta"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        tblChi.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblChiMouseClicked(evt);
+            }
+        });
         jScrollPane2.setViewportView(tblChi);
 
         btnPre.setText("<");
+        btnPre.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPreActionPerformed(evt);
+            }
+        });
 
         btnLongPre.setText("|<");
+        btnLongPre.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLongPreActionPerformed(evt);
+            }
+        });
 
         btnNext.setText(">");
+        btnNext.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnNextActionPerformed(evt);
+            }
+        });
 
         btnLongNext.setText(">|");
+        btnLongNext.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLongNextActionPerformed(evt);
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(204, 0, 0));
@@ -98,6 +280,11 @@ public class Chi extends javax.swing.JFrame {
         jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         btnTimKiem.setText("Tìm Kiếm");
+        btnTimKiem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTimKiemActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -143,12 +330,10 @@ public class Chi extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 580, Short.MAX_VALUE))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 606, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
                         .addComponent(btnAdd)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnEdit)
@@ -230,22 +415,98 @@ public class Chi extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnAdd)
-                    .addComponent(btnEdit)
-                    .addComponent(btnDel)
-                    .addComponent(btnNew)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(btnLongPre)
                         .addComponent(btnPre)
                         .addComponent(btnNext)
-                        .addComponent(btnLongNext)))
+                        .addComponent(btnLongNext))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(btnAdd)
+                        .addComponent(btnEdit)
+                        .addComponent(btnDel)
+                        .addComponent(btnNew)))
                 .addGap(44, 44, 44))
         );
 
         pack();
-        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
+        // TODO add your handling code here:
+        try {
+            Double.parseDouble(txtSoTien.getText());
+            insert();
+        } catch (Exception e) {
+            DialogHelper.alert(this, "Số tiền không hợp lệ");
+        }
+    }//GEN-LAST:event_btnAddActionPerformed
+
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        // TODO add your handling code here:
+        this.load();
+        this.setStatus(true);
+    }//GEN-LAST:event_formWindowOpened
+
+    private void tblChiMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblChiMouseClicked
+        // TODO add your handling code here:
+        if (evt.getClickCount() == 2) {
+            this.index = tblChi.rowAtPoint(evt.getPoint());
+            if (this.index >= 0) {
+                this.edit();
+            }
+        }
+    }//GEN-LAST:event_tblChiMouseClicked
+
+    private void btnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditActionPerformed
+        // TODO add your handling code here:
+        try {
+            Double.parseDouble(txtSoTien.getText());
+            update();
+        } catch (Exception e) {
+            DialogHelper.alert(this, "Số tiền không hợp lệ");
+        }
+    }//GEN-LAST:event_btnEditActionPerformed
+
+    private void btnDelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDelActionPerformed
+        // TODO add your handling code here:
+        delete();
+    }//GEN-LAST:event_btnDelActionPerformed
+
+    private void btnNewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNewActionPerformed
+        // TODO add your handling code here:
+        clear();
+    }//GEN-LAST:event_btnNewActionPerformed
+
+    private void btnTimKiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTimKiemActionPerformed
+        // TODO add your handling code here:
+        this.load();
+        this.clear();
+    }//GEN-LAST:event_btnTimKiemActionPerformed
+
+    private void btnLongPreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLongPreActionPerformed
+        // TODO add your handling code here:
+        this.index = 0;
+        this.edit();
+    }//GEN-LAST:event_btnLongPreActionPerformed
+
+    private void btnPreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPreActionPerformed
+        // TODO add your handling code here:
+        this.index--;
+        this.edit();
+    }//GEN-LAST:event_btnPreActionPerformed
+
+    private void btnNextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNextActionPerformed
+        // TODO add your handling code here:
+        this.index++;
+        this.edit();
+    }//GEN-LAST:event_btnNextActionPerformed
+
+    private void btnLongNextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLongNextActionPerformed
+        // TODO add your handling code here:
+        this.index = tblChi.getRowCount() - 1;
+        this.edit();
+    }//GEN-LAST:event_btnLongNextActionPerformed
 
     /**
      * @param args the command line arguments
@@ -264,20 +525,21 @@ public class Chi extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Chi.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ChiUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Chi.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ChiUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Chi.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ChiUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Chi.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ChiUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Chi().setVisible(true);
+                new ChiUI().setVisible(true);
             }
         });
     }
@@ -292,7 +554,6 @@ public class Chi extends javax.swing.JFrame {
     private javax.swing.JButton btnNext;
     private javax.swing.JButton btnPre;
     private javax.swing.JButton btnTimKiem;
-    private datechooser.beans.DateChooserDialog dateChooserDialog1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

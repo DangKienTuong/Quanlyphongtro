@@ -20,7 +20,7 @@ import phongtro.model.Chi;
 public class ChiDAO {
 
     public void insert(Chi model) {
-        String sql = "INSERT INTO Chi (Machi, Tenkhoanchi, Ngaychi, Loaikhoanchi, Soten, Mota) VALUES (?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO Chi (Machi, Tenkhoanchi, Ngaychi, Loaikhoanchi, Sotien, Mota) VALUES (?, ?, ?, ?, ?, ?)";
         JdbcHelper.executeUpdate(sql,
                 model.getMaChi(),
                 model.getTenKhoanChi(),
