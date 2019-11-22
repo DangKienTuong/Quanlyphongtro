@@ -57,7 +57,7 @@ public class HopdongDAO {
     }
 
     public List<Hopdong> selectByKeyword(String keyword) {
-        String sql = "SELECT * FROM Hopdong WHERE Mahopdong LIKE ?";
+        String sql = "SELECT * FROM Hopdong WHERE Maphong LIKE ?";
         return select(sql, "%" + keyword + "%");
     }
 

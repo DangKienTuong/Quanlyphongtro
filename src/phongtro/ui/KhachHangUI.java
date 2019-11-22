@@ -22,6 +22,7 @@ import phongtro.dao.KhachhangDAO;
 import phongtro.dao.PhongDAO;
 import phongtro.helper.DialogHelper;
 import phongtro.model.Khachhang;
+import phongtro.model.Phong;
 
 /**
  *
@@ -173,8 +174,8 @@ public class KhachHangUI extends javax.swing.JFrame {
         model.removeAllElements();
         try {
             PhongDAO pdao = new PhongDAO();
-            List<phongtro.model.Phong> list = pdao.select();
-            for (phongtro.model.Phong cd : list) {
+            List<Phong> list = pdao.select();
+            for (Phong cd : list) {
                 model.addElement(cd.getMaPhong());
             }
         } catch (Exception e) {

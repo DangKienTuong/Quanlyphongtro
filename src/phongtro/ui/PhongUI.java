@@ -5,17 +5,141 @@
  */
 package phongtro.ui;
 
+import java.awt.HeadlessException;
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
+import phongtro.dao.PhongDAO;
+import phongtro.helper.DialogHelper;
+import phongtro.model.Phong;
+
 /**
  *
  * @author Tường Ngao Tạng
  */
-public class Phong extends javax.swing.JFrame {
+public class PhongUI extends javax.swing.JFrame {
 
     /**
      * Creates new form Phong
      */
-    public Phong() {
+    public PhongUI() {
         initComponents();
+        init();
+    }
+    int index = 0;
+    PhongDAO dao = new PhongDAO();
+
+    void init() {
+        setLocationRelativeTo(null);
+    }
+
+    void load() {
+        DefaultTableModel model = (DefaultTableModel) tblPhong.getModel();
+        model.setRowCount(0);
+        try {
+            String keyword = txtTimKiem.getText();
+            List<Phong> list = dao.selectByKeyword(keyword);
+            for (Phong ph : list) {
+                Object[] row = {
+                    ph.getMaPhong(),
+                    ph.getTenPhong(),
+                    ph.getSoNguoiToiDa(),
+                    ph.getDonGia(),
+                    ph.getTrangThai(),
+                    ph.getMoTa()
+                };
+                model.addRow(row);
+            }
+        } catch (Exception e) {
+            DialogHelper.alert(this, "Lỗi truy vấn dữ liệu!");
+        }
+    }
+
+    void insert() {
+        Phong model = getModel();
+        try {
+            dao.insert(model);
+            this.load();
+            this.clear();
+            DialogHelper.alert(this, "Thêm mới thành công!");
+        } catch (Exception e) {
+            DialogHelper.alert(this, "Thêm mới thất bại!");
+        }
+    }
+
+    void update() {
+        Phong model = getModel();
+        try {
+            dao.update(model);
+            this.load();
+            DialogHelper.alert(this, "Cập nhật thành công!");
+        } catch (Exception e) {
+            DialogHelper.alert(this, "Cập nhật thất bại!");
+        }
+    }
+
+    void delete() {
+        if (DialogHelper.confirm(this, "Bạn thực sự muốn xóa người học này?")) {
+            String user = txtMaPhong.getText();
+            try {
+                dao.delete(user);
+                this.load();
+                this.clear();
+                DialogHelper.alert(this, "Xóa thành công!");
+            } catch (HeadlessException e) {
+                DialogHelper.alert(this, "Xóa thất bại!");
+            }
+        }
+    }
+
+    void clear() {
+        Phong model = new Phong();
+        this.setModel(model);
+        setStatus(true);
+        txtDonGia.setText("");
+        txtSoNguoiToiDa.setText("");
+    }
+
+    void edit() {
+        try {
+            String user = (String) tblPhong.getValueAt(this.index, 0);
+            Phong model = dao.findById(user);
+            if (model != null) {
+                this.setModel(model);
+                this.setStatus(false);
+            }
+        } catch (Exception e) {
+            DialogHelper.alert(this, "Lỗi truy vấn dữ liệu!");
+        }
+    }
+
+    void setModel(Phong model) {
+        txtMaPhong.setText(model.getMaPhong());
+        txtTenPhong.setText(model.getTenPhong());
+        txtSoNguoiToiDa.setText(model.getSoNguoiToiDa() + "");
+        txtDonGia.setText(model.getDonGia() + "");
+        txtTrangThai.setText(model.getTrangThai());
+        txtMoTa.setText(model.getMoTa());
+    }
+
+    Phong getModel() {
+        Phong model = new Phong();
+        model.setMaPhong(txtMaPhong.getText());
+        model.setTenPhong(txtTenPhong.getText());
+        model.setSoNguoiToiDa(Integer.parseInt(txtSoNguoiToiDa.getText()));
+        model.setDonGia(Double.parseDouble(txtDonGia.getText()));
+        model.setTrangThai(txtTrangThai.getText());
+        model.setMoTa(txtMoTa.getText());
+        return model;
+    }
+
+    void setStatus(boolean insertable) {
+        txtMaPhong.setEditable(insertable);
+        boolean first = this.index > 0;
+        boolean last = this.index < tblPhong.getRowCount() - 1;
+        btnLongPre.setEnabled(!insertable && first);
+        btnPre.setEnabled(!insertable && first);
+        btnNext.setEnabled(!insertable && last);
+        btnLongNext.setEnabled(!insertable && last);
     }
 
     /**
@@ -56,14 +180,39 @@ public class Phong extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
 
         btnAdd.setText("Thêm");
+        btnAdd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAddActionPerformed(evt);
+            }
+        });
 
         btnEdit.setText("Sửa");
+        btnEdit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEditActionPerformed(evt);
+            }
+        });
 
         btnDel.setText("Xóa");
+        btnDel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDelActionPerformed(evt);
+            }
+        });
 
         btnNew.setText("Mới");
+        btnNew.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnNewActionPerformed(evt);
+            }
+        });
 
         tblPhong.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -75,20 +224,58 @@ public class Phong extends javax.swing.JFrame {
             new String [] {
                 "Ma Phong", "Ten Phong", "So Nguoi Toi Da", "Don Gia", "Trang Thai", "Mo Ta"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        tblPhong.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblPhongMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tblPhong);
 
         btnLongPre.setText("|<");
+        btnLongPre.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLongPreActionPerformed(evt);
+            }
+        });
 
         btnPre.setText("<");
+        btnPre.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPreActionPerformed(evt);
+            }
+        });
 
         btnNext.setText(">");
+        btnNext.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnNextActionPerformed(evt);
+            }
+        });
 
         btnLongNext.setText(">|");
+        btnLongNext.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLongNextActionPerformed(evt);
+            }
+        });
 
         jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         btnTimKiem.setText("Tìm Kiếm");
+        btnTimKiem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTimKiemActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -238,6 +425,84 @@ public class Phong extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        // TODO add your handling code here:
+        this.load();
+        this.setStatus(true);
+    }//GEN-LAST:event_formWindowOpened
+
+    private void tblPhongMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblPhongMouseClicked
+        // TODO add your handling code here:
+        if (evt.getClickCount() == 2) {
+            this.index = tblPhong.rowAtPoint(evt.getPoint());
+            if (this.index >= 0) {
+                this.edit();
+            }
+        }
+    }//GEN-LAST:event_tblPhongMouseClicked
+
+    private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
+        // TODO add your handling code here:
+        try {
+            Integer.parseInt(txtSoNguoiToiDa.getText());
+            Double.parseDouble(txtDonGia.getText());
+            insert();
+        } catch (Exception e) {
+            DialogHelper.alert(this, "Số nhập vào không hợp lệ");
+        }
+    }//GEN-LAST:event_btnAddActionPerformed
+
+    private void btnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditActionPerformed
+        // TODO add your handling code here:
+        try {
+            Integer.parseInt(txtSoNguoiToiDa.getText());
+            Double.parseDouble(txtDonGia.getText());
+            update();
+        } catch (Exception e) {
+            DialogHelper.alert(this, "Số nhập vào không hợp lệ");
+        }
+    }//GEN-LAST:event_btnEditActionPerformed
+
+    private void btnDelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDelActionPerformed
+        // TODO add your handling code here:
+        delete();
+    }//GEN-LAST:event_btnDelActionPerformed
+
+    private void btnNewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNewActionPerformed
+        // TODO add your handling code here:
+        clear();
+    }//GEN-LAST:event_btnNewActionPerformed
+
+    private void btnTimKiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTimKiemActionPerformed
+        // TODO add your handling code here:
+        this.load();
+        this.clear();
+    }//GEN-LAST:event_btnTimKiemActionPerformed
+
+    private void btnLongPreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLongPreActionPerformed
+        // TODO add your handling code here:
+        this.index = 0;
+        this.edit();
+    }//GEN-LAST:event_btnLongPreActionPerformed
+
+    private void btnPreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPreActionPerformed
+        // TODO add your handling code here:
+        this.index--;
+        this.edit();
+    }//GEN-LAST:event_btnPreActionPerformed
+
+    private void btnNextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNextActionPerformed
+        // TODO add your handling code here:
+        this.index++;
+        this.edit();
+    }//GEN-LAST:event_btnNextActionPerformed
+
+    private void btnLongNextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLongNextActionPerformed
+        // TODO add your handling code here:
+        this.index = tblPhong.getRowCount() - 1;
+        this.edit();
+    }//GEN-LAST:event_btnLongNextActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -255,20 +520,21 @@ public class Phong extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Phong.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(PhongUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Phong.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(PhongUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Phong.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(PhongUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Phong.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(PhongUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Phong().setVisible(true);
+                new PhongUI().setVisible(true);
             }
         });
     }
