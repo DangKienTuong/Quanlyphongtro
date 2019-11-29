@@ -5,12 +5,23 @@
  */
 package phongtro.ui;
 
+import com.itextpdf.text.Document;
+import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.pdf.PdfPTable;
+import com.itextpdf.text.pdf.PdfWriter;
 import java.awt.HeadlessException;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JFileChooser;
 import javax.swing.table.DefaultTableModel;
 import phongtro.dao.ChiDAO;
+import phongtro.dao.HoadonphongDAO;
 import phongtro.helper.DialogHelper;
 import phongtro.model.Chi;
+import phongtro.model.Hoadonphong;
 
 /**
  *

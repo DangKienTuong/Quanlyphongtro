@@ -25,64 +25,40 @@ public class AdminUI extends javax.swing.JFrame {
         initComponents();
         init();
     }
-    
+
     int index = 0;
     AdminDAO dao = new AdminDAO();
-    
+
     void init() {
         setLocationRelativeTo(null);
     }
-    
-    void load() {
-        DefaultTableModel model = (DefaultTableModel) tblAdmin.getModel();
-        model.setRowCount(0);
-        try {
-            String keyword = txtTimKiem.getText();
-            List<Admin> list = dao.selectByKeyword(keyword);
-            for (Admin ad : list) {
-                Object[] row = {
-                    ad.getUsername(),
-                    ad.getPass(),
-                    ad.getSdt(),
-                    ad.getEmail(),
-                    ad.getGhiChu()
-                };
-                model.addRow(row);
-            }
-        } catch (Exception e) {
-            DialogHelper.alert(this, "Lỗi truy vấn dữ liệu!");
-        }
-    }
-    
+
     void insert() {
         Admin model = getModel();
         try {
             dao.insert(model);
-            this.load();
             this.clear();
             DialogHelper.alert(this, "Thêm mới thành công!");
         } catch (Exception e) {
             DialogHelper.alert(this, "Thêm mới thất bại!");
         }
     }
-    
+
     void update() {
         Admin model = getModel();
         try {
             dao.update(model);
-            this.load();
             DialogHelper.alert(this, "Cập nhật thành công!");
         } catch (Exception e) {
             DialogHelper.alert(this, "Cập nhật thất bại!");
         }
     }
-    
+
     void delete() {
         if (DialogHelper.confirm(this, "Bạn thực sự muốn xóa người học này?")) {
             String user = txtUser.getText();
             try {
                 dao.delete(user);
-                this.load();
                 this.clear();
                 DialogHelper.alert(this, "Xóa thành công!");
             } catch (HeadlessException e) {
@@ -90,26 +66,13 @@ public class AdminUI extends javax.swing.JFrame {
             }
         }
     }
-    
+
     void clear() {
         Admin model = new Admin();
         this.setModel(model);
         setStatus(true);
     }
-    
-    void edit() {
-        try {
-            String user = (String) tblAdmin.getValueAt(this.index, 0);
-            Admin model = dao.findById(user);
-            if (model != null) {
-                this.setModel(model);
-                this.setStatus(false);
-            }
-        } catch (Exception e) {
-            DialogHelper.alert(this, "Lỗi truy vấn dữ liệu!");
-        }
-    }
-    
+
     void setModel(Admin model) {
         txtUser.setText(model.getUsername());
         txtPass.setText(model.getPass());
@@ -117,7 +80,7 @@ public class AdminUI extends javax.swing.JFrame {
         txtEmail.setText(model.getEmail());
         txtGhiChu.setText(model.getGhiChu());
     }
-    
+
     Admin getModel() {
         Admin model = new Admin();
         model.setUsername(txtUser.getText());
@@ -127,15 +90,9 @@ public class AdminUI extends javax.swing.JFrame {
         model.setGhiChu(txtGhiChu.getText());
         return model;
     }
-    
+
     void setStatus(boolean insertable) {
         txtUser.setEditable(insertable);
-        boolean first = this.index > 0;
-        boolean last = this.index < tblAdmin.getRowCount() - 1;
-        btnLongPre.setEnabled(!insertable && first);
-        btnPre.setEnabled(!insertable && first);
-        btnNext.setEnabled(!insertable && last);
-        btnLongNext.setEnabled(!insertable && last);
     }
 
     /**
@@ -153,12 +110,6 @@ public class AdminUI extends javax.swing.JFrame {
         txtEmail = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         txtGhiChu = new javax.swing.JTextArea();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        tblAdmin = new javax.swing.JTable();
-        btnLongPre = new javax.swing.JButton();
-        btnPre = new javax.swing.JButton();
-        btnNext = new javax.swing.JButton();
-        btnLongNext = new javax.swing.JButton();
         btnAdd = new javax.swing.JButton();
         btnEdit = new javax.swing.JButton();
         btnDel = new javax.swing.JButton();
@@ -189,60 +140,6 @@ public class AdminUI extends javax.swing.JFrame {
         txtGhiChu.setColumns(20);
         txtGhiChu.setRows(5);
         jScrollPane1.setViewportView(txtGhiChu);
-
-        tblAdmin.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
-            },
-            new String [] {
-                "User", "Pass", "Sdt", "Email", "Ghichu"
-            }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, false, false, false, false
-            };
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        tblAdmin.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tblAdminMouseClicked(evt);
-            }
-        });
-        jScrollPane2.setViewportView(tblAdmin);
-
-        btnLongPre.setText("|<");
-        btnLongPre.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnLongPreActionPerformed(evt);
-            }
-        });
-
-        btnPre.setText("<");
-        btnPre.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnPreActionPerformed(evt);
-            }
-        });
-
-        btnNext.setText(">");
-        btnNext.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnNextActionPerformed(evt);
-            }
-        });
-
-        btnLongNext.setText(">|");
-        btnLongNext.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnLongNextActionPerformed(evt);
-            }
-        });
 
         btnAdd.setText("Thêm");
         btnAdd.addActionListener(new java.awt.event.ActionListener() {
@@ -331,28 +228,8 @@ public class AdminUI extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane2)
-                        .addContainerGap())
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(btnAdd)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnEdit)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnDel)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnNew)
-                                .addGap(76, 76, 76)
-                                .addComponent(btnLongPre)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnPre)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnNext)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnLongNext))
-                            .addComponent(jLabel7))
-                        .addGap(0, 0, Short.MAX_VALUE))
+                        .addComponent(jLabel7)
+                        .addGap(0, 430, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
@@ -373,6 +250,16 @@ public class AdminUI extends javax.swing.JFrame {
                                 .addGap(77, 77, 77)
                                 .addComponent(jLabel3)))
                         .addGap(27, 27, 27))))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnAdd)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnEdit)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnDel)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnNew)
+                .addGap(111, 111, 111))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -401,18 +288,12 @@ public class AdminUI extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnAdd)
                     .addComponent(btnEdit)
                     .addComponent(btnDel)
-                    .addComponent(btnNew)
-                    .addComponent(btnLongPre)
-                    .addComponent(btnPre)
-                    .addComponent(btnNext)
-                    .addComponent(btnLongNext))
-                .addGap(26, 26, 26))
+                    .addComponent(btnNew))
+                .addGap(36, 36, 36))
         );
 
         pack();
@@ -422,70 +303,34 @@ public class AdminUI extends javax.swing.JFrame {
     private void txtEmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtEmailActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtEmailActionPerformed
-    
+
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         // TODO add your handling code here:
-        this.load();
         this.setStatus(true);
     }//GEN-LAST:event_formWindowOpened
-    
+
     private void btnNewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNewActionPerformed
         // TODO add your handling code here:
         clear();
     }//GEN-LAST:event_btnNewActionPerformed
-    
-    private void tblAdminMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblAdminMouseClicked
-        // TODO add your handling code here:
-        if (evt.getClickCount() == 2) {
-            this.index = tblAdmin.rowAtPoint(evt.getPoint());
-            if (this.index >= 0) {
-                this.edit();
-            }
-        }
-    }//GEN-LAST:event_tblAdminMouseClicked
-    
+
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
         // TODO add your handling code here:
         insert();
     }//GEN-LAST:event_btnAddActionPerformed
-    
+
     private void btnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditActionPerformed
         // TODO add your handling code here:
         update();
     }//GEN-LAST:event_btnEditActionPerformed
-    
+
     private void btnDelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDelActionPerformed
         // TODO add your handling code here:
         delete();
     }//GEN-LAST:event_btnDelActionPerformed
-    
-    private void btnLongPreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLongPreActionPerformed
-        // TODO add your handling code here:
-        this.index = 0;
-        this.edit();
-    }//GEN-LAST:event_btnLongPreActionPerformed
-    
-    private void btnPreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPreActionPerformed
-        // TODO add your handling code here:
-        this.index--;
-        this.edit();
-    }//GEN-LAST:event_btnPreActionPerformed
-    
-    private void btnNextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNextActionPerformed
-        // TODO add your handling code here:
-        this.index++;
-        this.edit();
-    }//GEN-LAST:event_btnNextActionPerformed
-    
-    private void btnLongNextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLongNextActionPerformed
-        // TODO add your handling code here:
-        this.index = tblAdmin.getRowCount() - 1;
-        this.edit();
-    }//GEN-LAST:event_btnLongNextActionPerformed
-    
+
     private void btnTimKiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTimKiemActionPerformed
         // TODO add your handling code here:
-        this.load();
         this.clear();
     }//GEN-LAST:event_btnTimKiemActionPerformed
 
@@ -529,11 +374,7 @@ public class AdminUI extends javax.swing.JFrame {
     private javax.swing.JButton btnAdd;
     private javax.swing.JButton btnDel;
     private javax.swing.JButton btnEdit;
-    private javax.swing.JButton btnLongNext;
-    private javax.swing.JButton btnLongPre;
     private javax.swing.JButton btnNew;
-    private javax.swing.JButton btnNext;
-    private javax.swing.JButton btnPre;
     private javax.swing.JButton btnTimKiem;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -543,8 +384,6 @@ public class AdminUI extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable tblAdmin;
     private javax.swing.JTextField txtEmail;
     private javax.swing.JTextArea txtGhiChu;
     private javax.swing.JTextField txtPass;

@@ -193,6 +193,7 @@ go
 alter table Khachhang add constraint FK_Khachhang
 	foreign key(Maphong) references Phong(Maphong)
 
+Select DATEPART(MONTH,[Ngaychi]) as Thang, DATEPART(YEAR,[Ngaychi]) as Nam,sum(Sotien) as TongChi from [dbo].[Chi] group by DATEPART(MONTH,[Ngaychi]), DATEPART(YEAR,[Ngaychi])
 
 
 
