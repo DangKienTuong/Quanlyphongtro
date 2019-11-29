@@ -37,11 +37,11 @@ public class ThongKeUI extends javax.swing.JFrame {
         init();
     }
     ThongkeDAO dao = new ThongkeDAO();
-    
+
     void init() {
         setLocationRelativeTo(null);
     }
-    
+
     void fillTable() {
         DefaultTableModel model = (DefaultTableModel) tblThongKe.getModel();
         model.setRowCount(0);
@@ -125,22 +125,22 @@ public class ThongKeUI extends javax.swing.JFrame {
         // TODO add your handling code here:
         fillTable();
     }//GEN-LAST:event_formWindowOpened
-    
+
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         String path = "";
         JFileChooser j = new JFileChooser();
         j.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
         int x = j.showSaveDialog(this);
-        
+
         if (x == JFileChooser.APPROVE_OPTION) {
             path = j.getSelectedFile().getPath();
         }
-        
+
         Document doc = new Document();
-        
+
         try {
-            PdfWriter.getInstance(doc, new FileOutputStream(path));
+            PdfWriter.getInstance(doc, new FileOutputStream(path + ".pdf"));
             doc.open();
             PdfPTable tbl = new PdfPTable(2);
             tbl.addCell("Thang/Nam");
@@ -149,7 +149,7 @@ public class ThongKeUI extends javax.swing.JFrame {
                 String thang = tblThongKe.getValueAt(i, 0).toString();
                 String nam = tblThongKe.getValueAt(i, 1).toString();
                 String loinhuan = tblThongKe.getValueAt(i, 2).toString();
-                
+
                 tbl.addCell(thang + "/" + nam);
                 tbl.addCell(loinhuan);
             }
