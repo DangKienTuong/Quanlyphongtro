@@ -5,6 +5,10 @@
  */
 package phongtro.ui;
 
+import java.awt.Color;
+import java.awt.Desktop;
+import java.awt.event.KeyEvent;
+import java.net.URI;
 import phongtro.dao.AdminDAO;
 import phongtro.helper.DialogHelper;
 import phongtro.model.Admin;
@@ -20,6 +24,9 @@ public class DangNhap extends javax.swing.JFrame {
      */
     public DangNhap() {
         initComponents();
+        btnExit.setText("X");
+        focus.requestFocus();
+        txtPass.setEchoChar((char) 0);
     }
     AdminDAO dao = new AdminDAO();
 
@@ -59,82 +66,138 @@ public class DangNhap extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jLabel2 = new javax.swing.JLabel();
         txtUser = new javax.swing.JTextField();
         txtPass = new javax.swing.JPasswordField();
+        chkShow = new javax.swing.JCheckBox();
+        btnExit = new javax.swing.JLabel();
+        btnTwitter = new javax.swing.JLabel();
+        btnFace = new javax.swing.JLabel();
+        showpassword = new javax.swing.JLabel();
         btnLogin = new javax.swing.JButton();
-        btnCancel = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
+        focus = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setMinimumSize(new java.awt.Dimension(742, 533));
+        setUndecorated(true);
+        setResizable(false);
+        getContentPane().setLayout(null);
+
+        jLabel2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        getContentPane().add(jLabel2);
+        jLabel2.setBounds(180, 330, 390, 60);
+
+        txtUser.setBackground(new java.awt.Color(209, 209, 209));
+        txtUser.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        txtUser.setForeground(new java.awt.Color(0, 0, 0));
+        txtUser.setText("Username");
+        txtUser.setBorder(null);
+        txtUser.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                txtUserFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtUserFocusLost(evt);
+            }
+        });
+        getContentPane().add(txtUser);
+        txtUser.setBounds(248, 193, 310, 40);
+
+        txtPass.setBackground(new java.awt.Color(209, 209, 209));
+        txtPass.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        txtPass.setForeground(new java.awt.Color(0, 0, 0));
+        txtPass.setText("Password");
+        txtPass.setBorder(null);
+        txtPass.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                txtPassFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtPassFocusLost(evt);
+            }
+        });
+        txtPass.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtPassKeyPressed(evt);
+            }
+        });
+        getContentPane().add(txtPass);
+        txtPass.setBounds(250, 262, 270, 40);
+
+        chkShow.setBackground(new java.awt.Color(209, 209, 209));
+        chkShow.setBorder(null);
+        chkShow.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                chkShowMouseClicked(evt);
+            }
+        });
+        getContentPane().add(chkShow);
+        chkShow.setBounds(530, 270, 20, 30);
+
+        btnExit.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        btnExit.setForeground(new java.awt.Color(0, 0, 0));
+        btnExit.setText("X");
+        btnExit.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnExit.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                btnExitMouseMoved(evt);
+            }
+        });
+        btnExit.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnExitMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnExitMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnExitMouseExited(evt);
+            }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                btnExitMouseReleased(evt);
+            }
+        });
+        getContentPane().add(btnExit);
+        btnExit.setBounds(704, 15, 10, 19);
+
+        btnTwitter.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnTwitter.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnTwitterMouseClicked(evt);
+            }
+        });
+        getContentPane().add(btnTwitter);
+        btnTwitter.setBounds(410, 430, 150, 50);
+
+        btnFace.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnFace.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnFaceMouseClicked(evt);
+            }
+        });
+        getContentPane().add(btnFace);
+        btnFace.setBounds(180, 430, 150, 50);
+
+        showpassword.setIcon(new javax.swing.ImageIcon(getClass().getResource("/phongtro/image/login.jpg"))); // NOI18N
+        getContentPane().add(showpassword);
+        showpassword.setBounds(0, -5, 742, 540);
 
         btnLogin.setText("Login");
+        btnLogin.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnLogin.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnLoginActionPerformed(evt);
             }
         });
+        getContentPane().add(btnLogin);
+        btnLogin.setBounds(178, 337, 390, 50);
+        getContentPane().add(jLabel1);
+        jLabel1.setBounds(70, 70, 0, 0);
 
-        btnCancel.setText("Cancel");
-        btnCancel.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCancelActionPerformed(evt);
-            }
-        });
-
-        jLabel1.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        jLabel1.setText("User");
-
-        jLabel2.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        jLabel2.setText("Pass");
-
-        jLabel3.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(204, 0, 0));
-        jLabel3.setText("ĐĂNG NHẬP");
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(52, 52, 52)
-                        .addComponent(jLabel1))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel2)))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(btnLogin)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 59, Short.MAX_VALUE)
-                        .addComponent(btnCancel))
-                    .addComponent(jLabel3)
-                    .addComponent(txtUser)
-                    .addComponent(txtPass))
-                .addContainerGap(78, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(15, 15, 15)
-                .addComponent(jLabel3)
-                .addGap(40, 40, 40)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtUser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtPass, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnLogin)
-                    .addComponent(btnCancel))
-                .addContainerGap(99, Short.MAX_VALUE))
-        );
+        focus.setText("jLabel1");
+        getContentPane().add(focus);
+        focus.setBounds(0, 70, 41, 16);
 
         pack();
         setLocationRelativeTo(null);
@@ -145,10 +208,100 @@ public class DangNhap extends javax.swing.JFrame {
         login();
     }//GEN-LAST:event_btnLoginActionPerformed
 
-    private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
+    private void btnExitMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnExitMouseClicked
         // TODO add your handling code here:
         exit();
-    }//GEN-LAST:event_btnCancelActionPerformed
+    }//GEN-LAST:event_btnExitMouseClicked
+
+    private void btnExitMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnExitMouseMoved
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnExitMouseMoved
+
+    private void btnExitMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnExitMouseReleased
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnExitMouseReleased
+
+    private void btnExitMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnExitMouseEntered
+        // TODO add your handling code here:
+        btnExit.setText("X");
+    }//GEN-LAST:event_btnExitMouseEntered
+
+    private void btnExitMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnExitMouseExited
+        // TODO add your handling code here:
+        btnExit.setText("");
+    }//GEN-LAST:event_btnExitMouseExited
+
+    private void btnFaceMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnFaceMouseClicked
+        // TODO add your handling code here:
+        Desktop browser = Desktop.getDesktop();
+        try {
+            browser.browse(new URI("https://www.facebook.com/tuongdk07102000"));
+        } catch (Exception ex) {
+            System.out.println(ex);
+        }
+    }//GEN-LAST:event_btnFaceMouseClicked
+
+    private void btnTwitterMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnTwitterMouseClicked
+        // TODO add your handling code here:
+        Desktop browser = Desktop.getDesktop();
+        try {
+            browser.browse(new URI("https://twitter.com/ngKinTng2?fbclid=IwAR2VN_TvJKmmRZVZ8X0op6ZeCZ42dJaN39AoUfTCymvfDq_UDN8vrFQPAYI"));
+        } catch (Exception ex) {
+            System.out.println(ex);
+        }
+    }//GEN-LAST:event_btnTwitterMouseClicked
+
+    private void chkShowMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_chkShowMouseClicked
+        // TODO add your handling code here:
+        if (chkShow.isSelected() & showpassword.getText().equals("")) {
+            txtPass.setEchoChar((char) 0);
+            showpassword.setText("Set");
+        } else {
+            txtPass.setEchoChar('*');
+            showpassword.setText("");
+        }
+    }//GEN-LAST:event_chkShowMouseClicked
+
+    private void txtPassKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPassKeyPressed
+        // TODO add your handling code here:
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            login();
+        }
+    }//GEN-LAST:event_txtPassKeyPressed
+
+    private void txtPassFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtPassFocusGained
+        // TODO add your handling code here:
+        if (txtPass.getText().equalsIgnoreCase("Password")) {
+            txtPass.setEchoChar('*');
+            txtPass.setText("");
+            txtPass.setForeground(Color.BLACK);
+        }
+    }//GEN-LAST:event_txtPassFocusGained
+
+    private void txtPassFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtPassFocusLost
+        // TODO add your handling code here:
+        if (txtPass.getText().equalsIgnoreCase("")) {
+            txtPass.setEchoChar((char) 0);
+            txtPass.setText("Password");
+            txtPass.setForeground(new Color(102, 102, 102));
+        }
+    }//GEN-LAST:event_txtPassFocusLost
+
+    private void txtUserFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtUserFocusGained
+        // TODO add your handling code here:
+        if (txtUser.getText().equalsIgnoreCase("Username")) {
+            txtUser.setText("");
+            txtUser.setForeground(Color.BLACK);
+        }
+    }//GEN-LAST:event_txtUserFocusGained
+
+    private void txtUserFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtUserFocusLost
+        // TODO add your handling code here:
+        if (txtUser.getText().equalsIgnoreCase("")) {
+            txtUser.setText("Username");
+            txtUser.setForeground(new Color(102, 102, 102));
+        }
+    }//GEN-LAST:event_txtUserFocusLost
 
     /**
      * @param args the command line arguments
@@ -186,11 +339,15 @@ public class DangNhap extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnCancel;
+    private javax.swing.JLabel btnExit;
+    private javax.swing.JLabel btnFace;
     private javax.swing.JButton btnLogin;
+    private javax.swing.JLabel btnTwitter;
+    private javax.swing.JCheckBox chkShow;
+    private javax.swing.JLabel focus;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel showpassword;
     private javax.swing.JPasswordField txtPass;
     private javax.swing.JTextField txtUser;
     // End of variables declaration//GEN-END:variables

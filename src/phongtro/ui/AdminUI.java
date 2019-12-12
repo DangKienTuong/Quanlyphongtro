@@ -25,14 +25,20 @@ public class AdminUI extends javax.swing.JFrame {
         initComponents();
         init();
     }
-
+    
     int index = 0;
     AdminDAO dao = new AdminDAO();
-
+    
+    void exit() {
+        Main main = new Main();
+        main.setVisible(true);
+        setVisible(false);
+    }
+    
     void init() {
         setLocationRelativeTo(null);
     }
-
+    
     void insert() {
         Admin model = getModel();
         try {
@@ -43,7 +49,7 @@ public class AdminUI extends javax.swing.JFrame {
             DialogHelper.alert(this, "Thêm mới thất bại!");
         }
     }
-
+    
     void update() {
         Admin model = getModel();
         try {
@@ -53,7 +59,7 @@ public class AdminUI extends javax.swing.JFrame {
             DialogHelper.alert(this, "Cập nhật thất bại!");
         }
     }
-
+    
     void delete() {
         if (DialogHelper.confirm(this, "Bạn thực sự muốn xóa người học này?")) {
             String user = txtUser.getText();
@@ -66,13 +72,13 @@ public class AdminUI extends javax.swing.JFrame {
             }
         }
     }
-
+    
     void clear() {
         Admin model = new Admin();
         this.setModel(model);
         setStatus(true);
     }
-
+    
     void setModel(Admin model) {
         txtUser.setText(model.getUsername());
         txtPass.setText(model.getPass());
@@ -80,7 +86,7 @@ public class AdminUI extends javax.swing.JFrame {
         txtEmail.setText(model.getEmail());
         txtGhiChu.setText(model.getGhiChu());
     }
-
+    
     Admin getModel() {
         Admin model = new Admin();
         model.setUsername(txtUser.getText());
@@ -90,7 +96,7 @@ public class AdminUI extends javax.swing.JFrame {
         model.setGhiChu(txtGhiChu.getText());
         return model;
     }
-
+    
     void setStatus(boolean insertable) {
         txtUser.setEditable(insertable);
     }
@@ -110,36 +116,142 @@ public class AdminUI extends javax.swing.JFrame {
         txtEmail = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         txtGhiChu = new javax.swing.JTextArea();
+        jTextField1 = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
+        jTextField2 = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
+        txtTimKiem = new javax.swing.JTextField();
+        btnExit = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
+        Background = new javax.swing.JLabel();
         btnAdd = new javax.swing.JButton();
         btnEdit = new javax.swing.JButton();
         btnDel = new javax.swing.JButton();
         btnNew = new javax.swing.JButton();
-        jPanel1 = new javax.swing.JPanel();
-        txtTimKiem = new javax.swing.JTextField();
         btnTimKiem = new javax.swing.JButton();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setMinimumSize(new java.awt.Dimension(1020, 717));
+        setUndecorated(true);
+        setResizable(false);
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowOpened(java.awt.event.WindowEvent evt) {
                 formWindowOpened(evt);
             }
         });
+        getContentPane().setLayout(null);
 
+        txtUser.setBackground(new java.awt.Color(196, 200, 203));
+        txtUser.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        txtUser.setBorder(null);
+        getContentPane().add(txtUser);
+        txtUser.setBounds(230, 200, 290, 40);
+
+        txtPass.setBackground(new java.awt.Color(196, 200, 203));
+        txtPass.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        txtPass.setBorder(null);
+        getContentPane().add(txtPass);
+        txtPass.setBounds(230, 280, 300, 40);
+
+        txtSdt.setBackground(new java.awt.Color(196, 200, 203));
+        txtSdt.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        txtSdt.setBorder(null);
+        getContentPane().add(txtSdt);
+        txtSdt.setBounds(670, 200, 300, 40);
+
+        txtEmail.setBackground(new java.awt.Color(196, 200, 203));
+        txtEmail.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        txtEmail.setBorder(null);
         txtEmail.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtEmailActionPerformed(evt);
             }
         });
+        getContentPane().add(txtEmail);
+        txtEmail.setBounds(670, 270, 300, 40);
 
+        txtGhiChu.setBackground(new java.awt.Color(196, 200, 203));
         txtGhiChu.setColumns(20);
+        txtGhiChu.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         txtGhiChu.setRows(5);
+        txtGhiChu.setBorder(null);
         jScrollPane1.setViewportView(txtGhiChu);
+
+        getContentPane().add(jScrollPane1);
+        jScrollPane1.setBounds(230, 370, 486, 123);
+
+        jTextField1.setBackground(new java.awt.Color(255, 255, 255));
+        jTextField1.setBorder(null);
+        getContentPane().add(jTextField1);
+        jTextField1.setBounds(370, 650, 450, 40);
+
+        jLabel1.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(51, 51, 51));
+        jLabel1.setText("Password:");
+        getContentPane().add(jLabel1);
+        jLabel1.setBounds(230, 250, 90, 20);
+
+        jTextField2.setBackground(new java.awt.Color(242, 246, 249));
+        jTextField2.setBorder(null);
+        getContentPane().add(jTextField2);
+        jTextField2.setBounds(230, 240, 100, 16);
+
+        jLabel2.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(51, 51, 51));
+        jLabel2.setText("Ghi chú:");
+        getContentPane().add(jLabel2);
+        jLabel2.setBounds(230, 340, 70, 24);
+
+        txtTimKiem.setBackground(new java.awt.Color(255, 255, 255));
+        txtTimKiem.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        txtTimKiem.setBorder(null);
+        getContentPane().add(txtTimKiem);
+        txtTimKiem.setBounds(710, 115, 210, 19);
+
+        btnExit.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        btnExit.setForeground(new java.awt.Color(255, 0, 0));
+        btnExit.setText("X");
+        btnExit.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnExit.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnExitMouseClicked(evt);
+            }
+        });
+        getContentPane().add(btnExit);
+        btnExit.setBounds(990, 7, 10, 19);
+
+        jLabel3.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        getContentPane().add(jLabel3);
+        jLabel3.setBounds(50, 290, 110, 40);
+
+        jLabel4.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        getContentPane().add(jLabel4);
+        jLabel4.setBounds(50, 360, 110, 40);
+
+        jLabel5.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        getContentPane().add(jLabel5);
+        jLabel5.setBounds(60, 440, 100, 40);
+
+        jLabel10.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        getContentPane().add(jLabel10);
+        jLabel10.setBounds(920, 110, 60, 40);
+
+        jLabel11.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        getContentPane().add(jLabel11);
+        jLabel11.setBounds(990, 10, 20, 20);
+
+        jLabel12.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        getContentPane().add(jLabel12);
+        jLabel12.setBounds(50, 220, 110, 40);
+
+        Background.setIcon(new javax.swing.ImageIcon(getClass().getResource("/phongtro/image/admin.jpg"))); // NOI18N
+        getContentPane().add(Background);
+        Background.setBounds(0, 0, 1020, 710);
 
         btnAdd.setText("Thêm");
         btnAdd.addActionListener(new java.awt.event.ActionListener() {
@@ -147,6 +259,8 @@ public class AdminUI extends javax.swing.JFrame {
                 btnAddActionPerformed(evt);
             }
         });
+        getContentPane().add(btnAdd);
+        btnAdd.setBounds(50, 220, 120, 40);
 
         btnEdit.setText("Sửa");
         btnEdit.addActionListener(new java.awt.event.ActionListener() {
@@ -154,6 +268,8 @@ public class AdminUI extends javax.swing.JFrame {
                 btnEditActionPerformed(evt);
             }
         });
+        getContentPane().add(btnEdit);
+        btnEdit.setBounds(50, 290, 120, 40);
 
         btnDel.setText("Xóa");
         btnDel.addActionListener(new java.awt.event.ActionListener() {
@@ -161,6 +277,8 @@ public class AdminUI extends javax.swing.JFrame {
                 btnDelActionPerformed(evt);
             }
         });
+        getContentPane().add(btnDel);
+        btnDel.setBounds(50, 360, 120, 50);
 
         btnNew.setText("Mới");
         btnNew.addActionListener(new java.awt.event.ActionListener() {
@@ -168,8 +286,8 @@ public class AdminUI extends javax.swing.JFrame {
                 btnNewActionPerformed(evt);
             }
         });
-
-        jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        getContentPane().add(btnNew);
+        btnNew.setBounds(50, 430, 120, 40);
 
         btnTimKiem.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         btnTimKiem.setText("Tim Kiem");
@@ -178,123 +296,8 @@ public class AdminUI extends javax.swing.JFrame {
                 btnTimKiemActionPerformed(evt);
             }
         });
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(txtTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(11, Short.MAX_VALUE))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap())
-        );
-
-        jLabel2.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        jLabel2.setText("User");
-
-        jLabel3.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(204, 0, 0));
-        jLabel3.setText("QUẢN LÝ TÀI KHOẢN ADMIN");
-
-        jLabel4.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        jLabel4.setText("Pass");
-
-        jLabel5.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        jLabel5.setText("Sdt");
-
-        jLabel6.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        jLabel6.setText("Email");
-
-        jLabel7.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        jLabel7.setText("Ghi Chú");
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel7)
-                        .addGap(0, 430, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(32, 32, 32)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabel4)
-                                    .addComponent(jLabel2)
-                                    .addComponent(jLabel5)
-                                    .addComponent(jLabel6))
-                                .addGap(18, 18, 18)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(txtSdt, javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(txtUser)
-                                    .addComponent(txtPass)
-                                    .addComponent(txtEmail)))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(77, 77, 77)
-                                .addComponent(jLabel3)))
-                        .addGap(27, 27, 27))))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnAdd)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnEdit)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnDel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnNew)
-                .addGap(111, 111, 111))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jLabel3)
-                .addGap(18, 18, 18)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtUser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtPass, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel4))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtSdt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel5))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel6))
-                .addGap(57, 57, 57)
-                .addComponent(jLabel7)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnAdd)
-                    .addComponent(btnEdit)
-                    .addComponent(btnDel)
-                    .addComponent(btnNew))
-                .addGap(36, 36, 36))
-        );
+        getContentPane().add(btnTimKiem);
+        btnTimKiem.setBounds(920, 110, 60, 40);
 
         pack();
         setLocationRelativeTo(null);
@@ -303,36 +306,51 @@ public class AdminUI extends javax.swing.JFrame {
     private void txtEmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtEmailActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtEmailActionPerformed
-
+    
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         // TODO add your handling code here:
         this.setStatus(true);
     }//GEN-LAST:event_formWindowOpened
-
+    
     private void btnNewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNewActionPerformed
         // TODO add your handling code here:
         clear();
     }//GEN-LAST:event_btnNewActionPerformed
-
+    
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
         // TODO add your handling code here:
         insert();
     }//GEN-LAST:event_btnAddActionPerformed
-
+    
     private void btnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditActionPerformed
         // TODO add your handling code here:
         update();
     }//GEN-LAST:event_btnEditActionPerformed
-
+    
     private void btnDelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDelActionPerformed
         // TODO add your handling code here:
         delete();
     }//GEN-LAST:event_btnDelActionPerformed
-
+    
     private void btnTimKiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTimKiemActionPerformed
         // TODO add your handling code here:
-        this.clear();
+        try {
+            String keyword = txtTimKiem.getText();
+            Admin model = dao.findById(keyword);
+            txtUser.setText(model.getUsername());
+            txtPass.setText(model.getPass());
+            txtSdt.setText(model.getSdt());
+            txtEmail.setText(model.getEmail());
+            txtGhiChu.setText(model.getGhiChu());
+        } catch (Exception e) {
+            DialogHelper.alert(this, "Lỗi truy vấn dữ liệu!");
+        }
     }//GEN-LAST:event_btnTimKiemActionPerformed
+    
+    private void btnExitMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnExitMouseClicked
+        // TODO add your handling code here:
+        exit();
+    }//GEN-LAST:event_btnExitMouseClicked
 
     /**
      * @param args the command line arguments
@@ -371,19 +389,24 @@ public class AdminUI extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel Background;
     private javax.swing.JButton btnAdd;
     private javax.swing.JButton btnDel;
     private javax.swing.JButton btnEdit;
+    private javax.swing.JLabel btnExit;
     private javax.swing.JButton btnNew;
     private javax.swing.JButton btnTimKiem;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField txtEmail;
     private javax.swing.JTextArea txtGhiChu;
     private javax.swing.JTextField txtPass;

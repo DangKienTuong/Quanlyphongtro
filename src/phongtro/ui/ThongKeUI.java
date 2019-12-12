@@ -42,6 +42,12 @@ public class ThongKeUI extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }
 
+    void exit() {
+        Main main = new Main();
+        main.setVisible(true);
+        setVisible(false);
+    }
+
     void fillTable() {
         DefaultTableModel model = (DefaultTableModel) tblThongKe.getModel();
         model.setRowCount(0);
@@ -62,15 +68,24 @@ public class ThongKeUI extends javax.swing.JFrame {
 
         jScrollPane1 = new javax.swing.JScrollPane();
         tblThongKe = new javax.swing.JTable();
+        jLabel9 = new javax.swing.JLabel();
+        btnExit = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setMinimumSize(new java.awt.Dimension(1020, 717));
+        setUndecorated(true);
+        setResizable(false);
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowOpened(java.awt.event.WindowEvent evt) {
                 formWindowOpened(evt);
             }
         });
+        getContentPane().setLayout(null);
 
+        tblThongKe.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         tblThongKe.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null},
@@ -82,10 +97,36 @@ public class ThongKeUI extends javax.swing.JFrame {
                 "Tháng", "Năm", "Tổng Chi"
             }
         ));
+        tblThongKe.setRowHeight(25);
+        tblThongKe.setSelectionBackground(new java.awt.Color(30, 168, 155));
         jScrollPane1.setViewportView(tblThongKe);
         if (tblThongKe.getColumnModel().getColumnCount() > 0) {
             tblThongKe.getColumnModel().getColumn(0).setResizable(false);
         }
+
+        getContentPane().add(jScrollPane1);
+        jScrollPane1.setBounds(280, 210, 670, 420);
+
+        jLabel9.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        getContentPane().add(jLabel9);
+        jLabel9.setBounds(990, 15, 20, 20);
+
+        btnExit.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        btnExit.setForeground(new java.awt.Color(255, 0, 0));
+        btnExit.setText("X");
+        btnExit.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnExit.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnExitMouseClicked(evt);
+            }
+        });
+        getContentPane().add(btnExit);
+        btnExit.setBounds(994, 12, 10, 19);
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/phongtro/image/thống kê chi.jpg"))); // NOI18N
+        jLabel1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        getContentPane().add(jLabel1);
+        jLabel1.setBounds(0, 0, 1020, 720);
 
         jButton1.setText("In");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -93,30 +134,10 @@ public class ThongKeUI extends javax.swing.JFrame {
                 jButton1ActionPerformed(evt);
             }
         });
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(132, 132, 132)
-                        .addComponent(jButton1)))
-                .addContainerGap(19, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(60, 60, 60)
-                .addComponent(jButton1)
-                .addGap(30, 30, 30)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(19, Short.MAX_VALUE))
-        );
+        getContentPane().add(jButton1);
+        jButton1.setBounds(20, 170, 120, 50);
+        getContentPane().add(jLabel2);
+        jLabel2.setBounds(20, 170, 130, 50);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -163,6 +184,11 @@ public class ThongKeUI extends javax.swing.JFrame {
         DialogHelper.alert(this, "In thành công");
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void btnExitMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnExitMouseClicked
+        // TODO add your handling code here:
+        exit();
+    }//GEN-LAST:event_btnExitMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -199,7 +225,11 @@ public class ThongKeUI extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel btnExit;
     private javax.swing.JButton jButton1;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tblThongKe;
     // End of variables declaration//GEN-END:variables
