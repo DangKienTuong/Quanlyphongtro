@@ -68,10 +68,8 @@ public class ThongKeUI extends javax.swing.JFrame {
 
         jScrollPane1 = new javax.swing.JScrollPane();
         tblThongKe = new javax.swing.JTable();
-        jLabel9 = new javax.swing.JLabel();
         btnExit = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        btnPrint = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -107,10 +105,6 @@ public class ThongKeUI extends javax.swing.JFrame {
         getContentPane().add(jScrollPane1);
         jScrollPane1.setBounds(280, 210, 670, 420);
 
-        jLabel9.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        getContentPane().add(jLabel9);
-        jLabel9.setBounds(990, 15, 20, 20);
-
         btnExit.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         btnExit.setForeground(new java.awt.Color(255, 0, 0));
         btnExit.setText("X");
@@ -123,19 +117,16 @@ public class ThongKeUI extends javax.swing.JFrame {
         getContentPane().add(btnExit);
         btnExit.setBounds(994, 12, 10, 19);
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/phongtro/image/thống kê chi.jpg"))); // NOI18N
-        jLabel1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        getContentPane().add(jLabel1);
-        jLabel1.setBounds(0, 0, 1020, 720);
+        btnPrint.setIcon(new javax.swing.ImageIcon(getClass().getResource("/phongtro/image/thống kê chi.jpg"))); // NOI18N
+        btnPrint.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        getContentPane().add(btnPrint);
+        btnPrint.setBounds(0, 0, 1020, 720);
 
-        jButton1.setText("In");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+        jLabel2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel2MouseClicked(evt);
             }
         });
-        getContentPane().add(jButton1);
-        jButton1.setBounds(20, 170, 120, 50);
         getContentPane().add(jLabel2);
         jLabel2.setBounds(20, 170, 130, 50);
 
@@ -147,7 +138,13 @@ public class ThongKeUI extends javax.swing.JFrame {
         fillTable();
     }//GEN-LAST:event_formWindowOpened
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btnExitMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnExitMouseClicked
+        // TODO add your handling code here:
+        exit();
+    }//GEN-LAST:event_btnExitMouseClicked
+
+    private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
+        // TODO add your handling code here:
         // TODO add your handling code here:
         String path = "";
         JFileChooser j = new JFileChooser();
@@ -182,12 +179,7 @@ public class ThongKeUI extends javax.swing.JFrame {
         }
         doc.close();
         DialogHelper.alert(this, "In thành công");
-    }//GEN-LAST:event_jButton1ActionPerformed
-
-    private void btnExitMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnExitMouseClicked
-        // TODO add your handling code here:
-        exit();
-    }//GEN-LAST:event_btnExitMouseClicked
+    }//GEN-LAST:event_jLabel2MouseClicked
 
     /**
      * @param args the command line arguments
@@ -226,10 +218,8 @@ public class ThongKeUI extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel btnExit;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel btnPrint;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tblThongKe;
     // End of variables declaration//GEN-END:variables

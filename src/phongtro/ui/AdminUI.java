@@ -25,20 +25,20 @@ public class AdminUI extends javax.swing.JFrame {
         initComponents();
         init();
     }
-    
+
     int index = 0;
     AdminDAO dao = new AdminDAO();
-    
+
     void exit() {
         Main main = new Main();
         main.setVisible(true);
         setVisible(false);
     }
-    
+
     void init() {
         setLocationRelativeTo(null);
     }
-    
+
     void insert() {
         Admin model = getModel();
         try {
@@ -49,7 +49,7 @@ public class AdminUI extends javax.swing.JFrame {
             DialogHelper.alert(this, "Thêm mới thất bại!");
         }
     }
-    
+
     void update() {
         Admin model = getModel();
         try {
@@ -59,7 +59,7 @@ public class AdminUI extends javax.swing.JFrame {
             DialogHelper.alert(this, "Cập nhật thất bại!");
         }
     }
-    
+
     void delete() {
         if (DialogHelper.confirm(this, "Bạn thực sự muốn xóa người học này?")) {
             String user = txtUser.getText();
@@ -72,13 +72,13 @@ public class AdminUI extends javax.swing.JFrame {
             }
         }
     }
-    
+
     void clear() {
         Admin model = new Admin();
         this.setModel(model);
         setStatus(true);
     }
-    
+
     void setModel(Admin model) {
         txtUser.setText(model.getUsername());
         txtPass.setText(model.getPass());
@@ -86,7 +86,7 @@ public class AdminUI extends javax.swing.JFrame {
         txtEmail.setText(model.getEmail());
         txtGhiChu.setText(model.getGhiChu());
     }
-    
+
     Admin getModel() {
         Admin model = new Admin();
         model.setUsername(txtUser.getText());
@@ -96,7 +96,7 @@ public class AdminUI extends javax.swing.JFrame {
         model.setGhiChu(txtGhiChu.getText());
         return model;
     }
-    
+
     void setStatus(boolean insertable) {
         txtUser.setEditable(insertable);
     }
@@ -122,18 +122,13 @@ public class AdminUI extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         txtTimKiem = new javax.swing.JTextField();
         btnExit = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel10 = new javax.swing.JLabel();
-        jLabel11 = new javax.swing.JLabel();
-        jLabel12 = new javax.swing.JLabel();
+        btnUpdate = new javax.swing.JLabel();
+        btnDelete = new javax.swing.JLabel();
+        btnNew = new javax.swing.JLabel();
+        btnSearch = new javax.swing.JLabel();
+        btnClose = new javax.swing.JLabel();
+        btnAdd = new javax.swing.JLabel();
         Background = new javax.swing.JLabel();
-        btnAdd = new javax.swing.JButton();
-        btnEdit = new javax.swing.JButton();
-        btnDel = new javax.swing.JButton();
-        btnNew = new javax.swing.JButton();
-        btnTimKiem = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(1020, 717));
@@ -225,79 +220,58 @@ public class AdminUI extends javax.swing.JFrame {
         getContentPane().add(btnExit);
         btnExit.setBounds(990, 7, 10, 19);
 
-        jLabel3.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        getContentPane().add(jLabel3);
-        jLabel3.setBounds(50, 290, 110, 40);
+        btnUpdate.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnUpdate.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnUpdateMouseClicked(evt);
+            }
+        });
+        getContentPane().add(btnUpdate);
+        btnUpdate.setBounds(50, 290, 110, 40);
 
-        jLabel4.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        getContentPane().add(jLabel4);
-        jLabel4.setBounds(50, 360, 110, 40);
+        btnDelete.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnDelete.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnDeleteMouseClicked(evt);
+            }
+        });
+        getContentPane().add(btnDelete);
+        btnDelete.setBounds(50, 360, 110, 40);
 
-        jLabel5.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        getContentPane().add(jLabel5);
-        jLabel5.setBounds(60, 440, 100, 40);
+        btnNew.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnNew.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnNewMouseClicked(evt);
+            }
+        });
+        getContentPane().add(btnNew);
+        btnNew.setBounds(60, 440, 100, 40);
 
-        jLabel10.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        getContentPane().add(jLabel10);
-        jLabel10.setBounds(920, 110, 60, 40);
+        btnSearch.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnSearch.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnSearchMouseClicked(evt);
+            }
+        });
+        getContentPane().add(btnSearch);
+        btnSearch.setBounds(920, 110, 60, 40);
 
-        jLabel11.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        getContentPane().add(jLabel11);
-        jLabel11.setBounds(990, 10, 20, 20);
+        btnClose.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        getContentPane().add(btnClose);
+        btnClose.setBounds(990, 10, 20, 20);
 
-        jLabel12.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        getContentPane().add(jLabel12);
-        jLabel12.setBounds(50, 220, 110, 40);
+        btnAdd.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnAdd.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnAddMouseClicked(evt);
+            }
+        });
+        getContentPane().add(btnAdd);
+        btnAdd.setBounds(50, 220, 110, 40);
 
         Background.setIcon(new javax.swing.ImageIcon(getClass().getResource("/phongtro/image/admin.jpg"))); // NOI18N
         getContentPane().add(Background);
         Background.setBounds(0, 0, 1020, 710);
-
-        btnAdd.setText("Thêm");
-        btnAdd.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAddActionPerformed(evt);
-            }
-        });
-        getContentPane().add(btnAdd);
-        btnAdd.setBounds(50, 220, 120, 40);
-
-        btnEdit.setText("Sửa");
-        btnEdit.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnEditActionPerformed(evt);
-            }
-        });
-        getContentPane().add(btnEdit);
-        btnEdit.setBounds(50, 290, 120, 40);
-
-        btnDel.setText("Xóa");
-        btnDel.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnDelActionPerformed(evt);
-            }
-        });
-        getContentPane().add(btnDel);
-        btnDel.setBounds(50, 360, 120, 50);
-
-        btnNew.setText("Mới");
-        btnNew.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnNewActionPerformed(evt);
-            }
-        });
-        getContentPane().add(btnNew);
-        btnNew.setBounds(50, 430, 120, 40);
-
-        btnTimKiem.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        btnTimKiem.setText("Tim Kiem");
-        btnTimKiem.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnTimKiemActionPerformed(evt);
-            }
-        });
-        getContentPane().add(btnTimKiem);
-        btnTimKiem.setBounds(920, 110, 60, 40);
 
         pack();
         setLocationRelativeTo(null);
@@ -306,33 +280,38 @@ public class AdminUI extends javax.swing.JFrame {
     private void txtEmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtEmailActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtEmailActionPerformed
-    
+
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         // TODO add your handling code here:
         this.setStatus(true);
     }//GEN-LAST:event_formWindowOpened
-    
-    private void btnNewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNewActionPerformed
+
+    private void btnExitMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnExitMouseClicked
         // TODO add your handling code here:
-        clear();
-    }//GEN-LAST:event_btnNewActionPerformed
-    
-    private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
+        exit();
+    }//GEN-LAST:event_btnExitMouseClicked
+
+    private void btnAddMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAddMouseClicked
         // TODO add your handling code here:
         insert();
-    }//GEN-LAST:event_btnAddActionPerformed
-    
-    private void btnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditActionPerformed
+    }//GEN-LAST:event_btnAddMouseClicked
+
+    private void btnUpdateMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnUpdateMouseClicked
         // TODO add your handling code here:
         update();
-    }//GEN-LAST:event_btnEditActionPerformed
-    
-    private void btnDelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDelActionPerformed
+    }//GEN-LAST:event_btnUpdateMouseClicked
+
+    private void btnDeleteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDeleteMouseClicked
         // TODO add your handling code here:
         delete();
-    }//GEN-LAST:event_btnDelActionPerformed
-    
-    private void btnTimKiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTimKiemActionPerformed
+    }//GEN-LAST:event_btnDeleteMouseClicked
+
+    private void btnNewMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnNewMouseClicked
+        // TODO add your handling code here:
+        clear();
+    }//GEN-LAST:event_btnNewMouseClicked
+
+    private void btnSearchMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSearchMouseClicked
         // TODO add your handling code here:
         try {
             String keyword = txtTimKiem.getText();
@@ -345,12 +324,7 @@ public class AdminUI extends javax.swing.JFrame {
         } catch (Exception e) {
             DialogHelper.alert(this, "Lỗi truy vấn dữ liệu!");
         }
-    }//GEN-LAST:event_btnTimKiemActionPerformed
-    
-    private void btnExitMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnExitMouseClicked
-        // TODO add your handling code here:
-        exit();
-    }//GEN-LAST:event_btnExitMouseClicked
+    }//GEN-LAST:event_btnSearchMouseClicked
 
     /**
      * @param args the command line arguments
@@ -390,20 +364,15 @@ public class AdminUI extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Background;
-    private javax.swing.JButton btnAdd;
-    private javax.swing.JButton btnDel;
-    private javax.swing.JButton btnEdit;
+    private javax.swing.JLabel btnAdd;
+    private javax.swing.JLabel btnClose;
+    private javax.swing.JLabel btnDelete;
     private javax.swing.JLabel btnExit;
-    private javax.swing.JButton btnNew;
-    private javax.swing.JButton btnTimKiem;
+    private javax.swing.JLabel btnNew;
+    private javax.swing.JLabel btnSearch;
+    private javax.swing.JLabel btnUpdate;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;

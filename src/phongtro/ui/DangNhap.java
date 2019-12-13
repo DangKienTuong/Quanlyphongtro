@@ -40,6 +40,8 @@ public class DangNhap extends javax.swing.JFrame {
                 if (matKhau.equals(matKhau2)) {
                     DialogHelper.alert(this, "Đăng nhập thành công!");
                     this.dispose();
+                    Main main = new Main();
+                    main.setVisible(true);
                 } else {
                     DialogHelper.alert(this, "Sai mật khẩu!");
                 }
@@ -66,7 +68,6 @@ public class DangNhap extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel2 = new javax.swing.JLabel();
         txtUser = new javax.swing.JTextField();
         txtPass = new javax.swing.JPasswordField();
         chkShow = new javax.swing.JCheckBox();
@@ -74,8 +75,8 @@ public class DangNhap extends javax.swing.JFrame {
         btnTwitter = new javax.swing.JLabel();
         btnFace = new javax.swing.JLabel();
         showpassword = new javax.swing.JLabel();
-        btnLogin = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
+        btnLogin = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
         focus = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -83,10 +84,6 @@ public class DangNhap extends javax.swing.JFrame {
         setUndecorated(true);
         setResizable(false);
         getContentPane().setLayout(null);
-
-        jLabel2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        getContentPane().add(jLabel2);
-        jLabel2.setBounds(180, 330, 390, 60);
 
         txtUser.setBackground(new java.awt.Color(209, 209, 209));
         txtUser.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
@@ -178,22 +175,21 @@ public class DangNhap extends javax.swing.JFrame {
         });
         getContentPane().add(btnFace);
         btnFace.setBounds(180, 430, 150, 50);
-
-        showpassword.setIcon(new javax.swing.ImageIcon(getClass().getResource("/phongtro/image/login.jpg"))); // NOI18N
         getContentPane().add(showpassword);
-        showpassword.setBounds(0, -5, 742, 540);
+        showpassword.setBounds(0, -5, 0, 540);
 
-        btnLogin.setText("Login");
         btnLogin.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnLogin.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnLoginActionPerformed(evt);
+        btnLogin.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnLoginMouseClicked(evt);
             }
         });
         getContentPane().add(btnLogin);
-        btnLogin.setBounds(178, 337, 390, 50);
-        getContentPane().add(jLabel1);
-        jLabel1.setBounds(70, 70, 0, 0);
+        btnLogin.setBounds(180, 340, 390, 50);
+
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/phongtro/image/login.jpg"))); // NOI18N
+        getContentPane().add(jLabel3);
+        jLabel3.setBounds(0, 0, 742, 540);
 
         focus.setText("jLabel1");
         getContentPane().add(focus);
@@ -202,11 +198,6 @@ public class DangNhap extends javax.swing.JFrame {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-
-    private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
-        // TODO add your handling code here:
-        login();
-    }//GEN-LAST:event_btnLoginActionPerformed
 
     private void btnExitMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnExitMouseClicked
         // TODO add your handling code here:
@@ -303,6 +294,11 @@ public class DangNhap extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_txtUserFocusLost
 
+    private void btnLoginMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLoginMouseClicked
+        // TODO add your handling code here:
+        login();
+    }//GEN-LAST:event_btnLoginMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -341,12 +337,11 @@ public class DangNhap extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel btnExit;
     private javax.swing.JLabel btnFace;
-    private javax.swing.JButton btnLogin;
+    private javax.swing.JLabel btnLogin;
     private javax.swing.JLabel btnTwitter;
     private javax.swing.JCheckBox chkShow;
     private javax.swing.JLabel focus;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel showpassword;
     private javax.swing.JPasswordField txtPass;
     private javax.swing.JTextField txtUser;

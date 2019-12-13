@@ -190,27 +190,18 @@ public class HoaDonDienNuocUI extends javax.swing.JFrame {
         tblHoaDonDienNuoc = new javax.swing.JTable();
         cboMaPhong = new javax.swing.JComboBox<>();
         txtTimKiem = new javax.swing.JTextField();
-        btnExit = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
+        btnClose = new javax.swing.JLabel();
+        btnUpdate = new javax.swing.JLabel();
+        btnDelete = new javax.swing.JLabel();
+        btnClear = new javax.swing.JLabel();
+        btnLongPre = new javax.swing.JLabel();
+        btnPre = new javax.swing.JLabel();
+        btnNext = new javax.swing.JLabel();
+        btnLongNext = new javax.swing.JLabel();
+        btnSearch = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
-        jLabel10 = new javax.swing.JLabel();
+        btnAdd = new javax.swing.JLabel();
         Background = new javax.swing.JLabel();
-        btnAdd = new javax.swing.JButton();
-        btnEdit = new javax.swing.JButton();
-        btnDel = new javax.swing.JButton();
-        btnNew = new javax.swing.JButton();
-        btnLongPre = new javax.swing.JButton();
-        btnPre = new javax.swing.JButton();
-        btnNext = new javax.swing.JButton();
-        btnLongNext = new javax.swing.JButton();
-        btnTimKiem = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(1020, 717));
@@ -303,142 +294,106 @@ public class HoaDonDienNuocUI extends javax.swing.JFrame {
         getContentPane().add(txtTimKiem);
         txtTimKiem.setBounds(720, 125, 210, 22);
 
-        btnExit.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        btnExit.setForeground(new java.awt.Color(255, 0, 0));
-        btnExit.setText("X");
-        btnExit.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnExit.addMouseListener(new java.awt.event.MouseAdapter() {
+        btnClose.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        btnClose.setForeground(new java.awt.Color(255, 0, 0));
+        btnClose.setText("X");
+        btnClose.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnClose.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnExitMouseClicked(evt);
+                btnCloseMouseClicked(evt);
             }
         });
-        getContentPane().add(btnExit);
-        btnExit.setBounds(995, 16, 9, 10);
+        getContentPane().add(btnClose);
+        btnClose.setBounds(995, 16, 9, 10);
 
-        jLabel1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        getContentPane().add(jLabel1);
-        jLabel1.setBounds(40, 300, 110, 30);
+        btnUpdate.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnUpdate.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnUpdateMouseClicked(evt);
+            }
+        });
+        getContentPane().add(btnUpdate);
+        btnUpdate.setBounds(40, 300, 110, 30);
 
-        jLabel2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        getContentPane().add(jLabel2);
-        jLabel2.setBounds(40, 370, 110, 30);
+        btnDelete.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnDelete.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnDeleteMouseClicked(evt);
+            }
+        });
+        getContentPane().add(btnDelete);
+        btnDelete.setBounds(40, 370, 110, 30);
 
-        jLabel3.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        getContentPane().add(jLabel3);
-        jLabel3.setBounds(40, 450, 110, 30);
+        btnClear.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnClear.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnClearMouseClicked(evt);
+            }
+        });
+        getContentPane().add(btnClear);
+        btnClear.setBounds(40, 450, 110, 30);
 
-        jLabel4.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        getContentPane().add(jLabel4);
-        jLabel4.setBounds(400, 670, 60, 20);
+        btnLongPre.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnLongPre.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnLongPreMouseClicked(evt);
+            }
+        });
+        getContentPane().add(btnLongPre);
+        btnLongPre.setBounds(400, 670, 60, 20);
 
-        jLabel5.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        getContentPane().add(jLabel5);
-        jLabel5.setBounds(500, 660, 60, 30);
+        btnPre.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnPre.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnPreMouseClicked(evt);
+            }
+        });
+        getContentPane().add(btnPre);
+        btnPre.setBounds(500, 660, 60, 30);
 
-        jLabel6.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        getContentPane().add(jLabel6);
-        jLabel6.setBounds(590, 660, 70, 30);
+        btnNext.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnNext.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnNextMouseClicked(evt);
+            }
+        });
+        getContentPane().add(btnNext);
+        btnNext.setBounds(590, 660, 70, 30);
 
-        jLabel7.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        getContentPane().add(jLabel7);
-        jLabel7.setBounds(700, 660, 60, 30);
+        btnLongNext.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnLongNext.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnLongNextMouseClicked(evt);
+            }
+        });
+        getContentPane().add(btnLongNext);
+        btnLongNext.setBounds(700, 660, 60, 30);
 
-        jLabel8.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        getContentPane().add(jLabel8);
-        jLabel8.setBounds(940, 120, 60, 30);
+        btnSearch.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnSearch.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnSearchMouseClicked(evt);
+            }
+        });
+        getContentPane().add(btnSearch);
+        btnSearch.setBounds(940, 120, 60, 30);
 
         jLabel9.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         getContentPane().add(jLabel9);
         jLabel9.setBounds(990, 10, 20, 20);
 
-        jLabel10.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        getContentPane().add(jLabel10);
-        jLabel10.setBounds(40, 230, 110, 30);
+        btnAdd.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnAdd.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnAddMouseClicked(evt);
+            }
+        });
+        getContentPane().add(btnAdd);
+        btnAdd.setBounds(40, 230, 110, 30);
 
         Background.setIcon(new javax.swing.ImageIcon(getClass().getResource("/phongtro/image/hóa đơn điện nước.jpg"))); // NOI18N
         getContentPane().add(Background);
         Background.setBounds(0, 0, 1020, 720);
-
-        btnAdd.setText("Thêm");
-        btnAdd.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAddActionPerformed(evt);
-            }
-        });
-        getContentPane().add(btnAdd);
-        btnAdd.setBounds(40, 220, 110, 40);
-
-        btnEdit.setText("Sửa");
-        btnEdit.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnEditActionPerformed(evt);
-            }
-        });
-        getContentPane().add(btnEdit);
-        btnEdit.setBounds(40, 290, 120, 50);
-
-        btnDel.setText("Xóa");
-        btnDel.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnDelActionPerformed(evt);
-            }
-        });
-        getContentPane().add(btnDel);
-        btnDel.setBounds(40, 370, 120, 40);
-
-        btnNew.setText("Mới");
-        btnNew.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnNewActionPerformed(evt);
-            }
-        });
-        getContentPane().add(btnNew);
-        btnNew.setBounds(40, 440, 110, 32);
-
-        btnLongPre.setText("|<");
-        btnLongPre.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnLongPreActionPerformed(evt);
-            }
-        });
-        getContentPane().add(btnLongPre);
-        btnLongPre.setBounds(390, 660, 70, 32);
-
-        btnPre.setText("<");
-        btnPre.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnPreActionPerformed(evt);
-            }
-        });
-        getContentPane().add(btnPre);
-        btnPre.setBounds(490, 660, 70, 32);
-
-        btnNext.setText(">");
-        btnNext.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnNextActionPerformed(evt);
-            }
-        });
-        getContentPane().add(btnNext);
-        btnNext.setBounds(590, 660, 70, 32);
-
-        btnLongNext.setText(">|");
-        btnLongNext.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnLongNextActionPerformed(evt);
-            }
-        });
-        getContentPane().add(btnLongNext);
-        btnLongNext.setBounds(690, 660, 70, 32);
-
-        btnTimKiem.setText("Tìm Kiếm");
-        btnTimKiem.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnTimKiemActionPerformed(evt);
-            }
-        });
-        getContentPane().add(btnTimKiem);
-        btnTimKiem.setBounds(940, 120, 60, 32);
 
         pack();
         setLocationRelativeTo(null);
@@ -461,60 +416,60 @@ public class HoaDonDienNuocUI extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_tblHoaDonDienNuocMouseClicked
 
-    private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
+    private void btnCloseMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCloseMouseClicked
+        // TODO add your handling code here:
+        exit();
+    }//GEN-LAST:event_btnCloseMouseClicked
+
+    private void btnAddMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAddMouseClicked
         // TODO add your handling code here:
         insert();
-    }//GEN-LAST:event_btnAddActionPerformed
+    }//GEN-LAST:event_btnAddMouseClicked
 
-    private void btnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditActionPerformed
+    private void btnUpdateMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnUpdateMouseClicked
         // TODO add your handling code here:
         update();
-    }//GEN-LAST:event_btnEditActionPerformed
+    }//GEN-LAST:event_btnUpdateMouseClicked
 
-    private void btnDelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDelActionPerformed
+    private void btnDeleteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDeleteMouseClicked
         // TODO add your handling code here:
         delete();
-    }//GEN-LAST:event_btnDelActionPerformed
+    }//GEN-LAST:event_btnDeleteMouseClicked
 
-    private void btnNewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNewActionPerformed
+    private void btnClearMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnClearMouseClicked
         // TODO add your handling code here:
         clear();
-    }//GEN-LAST:event_btnNewActionPerformed
+    }//GEN-LAST:event_btnClearMouseClicked
 
-    private void btnTimKiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTimKiemActionPerformed
-        // TODO add your handling code here:
-        this.load();
-        this.clear();
-    }//GEN-LAST:event_btnTimKiemActionPerformed
-
-    private void btnLongPreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLongPreActionPerformed
+    private void btnLongPreMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLongPreMouseClicked
         // TODO add your handling code here:
         this.index = 0;
         this.edit();
-    }//GEN-LAST:event_btnLongPreActionPerformed
+    }//GEN-LAST:event_btnLongPreMouseClicked
 
-    private void btnPreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPreActionPerformed
+    private void btnPreMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnPreMouseClicked
         // TODO add your handling code here:
         this.index--;
         this.edit();
-    }//GEN-LAST:event_btnPreActionPerformed
+    }//GEN-LAST:event_btnPreMouseClicked
 
-    private void btnNextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNextActionPerformed
+    private void btnNextMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnNextMouseClicked
         // TODO add your handling code here:
         this.index++;
         this.edit();
-    }//GEN-LAST:event_btnNextActionPerformed
+    }//GEN-LAST:event_btnNextMouseClicked
 
-    private void btnLongNextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLongNextActionPerformed
+    private void btnLongNextMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLongNextMouseClicked
         // TODO add your handling code here:
         this.index = tblHoaDonDienNuoc.getRowCount() - 1;
         this.edit();
-    }//GEN-LAST:event_btnLongNextActionPerformed
+    }//GEN-LAST:event_btnLongNextMouseClicked
 
-    private void btnExitMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnExitMouseClicked
+    private void btnSearchMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSearchMouseClicked
         // TODO add your handling code here:
-        exit();
-    }//GEN-LAST:event_btnExitMouseClicked
+        this.load();
+        this.clear();
+    }//GEN-LAST:event_btnSearchMouseClicked
 
     /**
      * @param args the command line arguments
@@ -554,26 +509,17 @@ public class HoaDonDienNuocUI extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Background;
-    private javax.swing.JButton btnAdd;
-    private javax.swing.JButton btnDel;
-    private javax.swing.JButton btnEdit;
-    private javax.swing.JLabel btnExit;
-    private javax.swing.JButton btnLongNext;
-    private javax.swing.JButton btnLongPre;
-    private javax.swing.JButton btnNew;
-    private javax.swing.JButton btnNext;
-    private javax.swing.JButton btnPre;
-    private javax.swing.JButton btnTimKiem;
+    private javax.swing.JLabel btnAdd;
+    private javax.swing.JLabel btnClear;
+    private javax.swing.JLabel btnClose;
+    private javax.swing.JLabel btnDelete;
+    private javax.swing.JLabel btnLongNext;
+    private javax.swing.JLabel btnLongPre;
+    private javax.swing.JLabel btnNext;
+    private javax.swing.JLabel btnPre;
+    private javax.swing.JLabel btnSearch;
+    private javax.swing.JLabel btnUpdate;
     private javax.swing.JComboBox<String> cboMaPhong;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tblHoaDonDienNuoc;

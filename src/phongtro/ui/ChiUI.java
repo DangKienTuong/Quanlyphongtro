@@ -154,10 +154,10 @@ public class ChiUI extends javax.swing.JFrame {
         txtMaChi.setEditable(insertable);
         boolean first = this.index > 0;
         boolean last = this.index < tblChi.getRowCount() - 1;
-        btnLongPre.setEnabled(!insertable && first);
-        btnPre.setEnabled(!insertable && first);
+        btnFirst.setEnabled(!insertable && first);
+        btnPrevious.setEnabled(!insertable && first);
         btnNext.setEnabled(!insertable && last);
-        btnLongNext.setEnabled(!insertable && last);
+        btnLast.setEnabled(!insertable && last);
     }
 
     /**
@@ -180,26 +180,17 @@ public class ChiUI extends javax.swing.JFrame {
         tblChi = new javax.swing.JTable();
         txtTimKiem = new javax.swing.JTextField();
         btnExit = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
-        jLabel9 = new javax.swing.JLabel();
-        jLabel10 = new javax.swing.JLabel();
+        btnUpdate = new javax.swing.JLabel();
+        btnDelete = new javax.swing.JLabel();
+        btnClear = new javax.swing.JLabel();
+        btnFirst = new javax.swing.JLabel();
+        btnPrevious = new javax.swing.JLabel();
+        btnNext = new javax.swing.JLabel();
+        btnLast = new javax.swing.JLabel();
+        btnSearch = new javax.swing.JLabel();
+        btnClose = new javax.swing.JLabel();
+        btnAdd = new javax.swing.JLabel();
         Background = new javax.swing.JLabel();
-        btnTimKiem = new javax.swing.JButton();
-        btnAdd = new javax.swing.JButton();
-        btnEdit = new javax.swing.JButton();
-        btnDel = new javax.swing.JButton();
-        btnNew = new javax.swing.JButton();
-        btnPre = new javax.swing.JButton();
-        btnLongPre = new javax.swing.JButton();
-        btnNext = new javax.swing.JButton();
-        btnLongNext = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(1020, 717));
@@ -304,152 +295,97 @@ public class ChiUI extends javax.swing.JFrame {
         getContentPane().add(btnExit);
         btnExit.setBounds(994, 7, 10, 19);
 
-        jLabel1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        getContentPane().add(jLabel1);
-        jLabel1.setBounds(20, 290, 140, 40);
+        btnUpdate.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnUpdate.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnUpdateMouseClicked(evt);
+            }
+        });
+        getContentPane().add(btnUpdate);
+        btnUpdate.setBounds(20, 290, 140, 40);
 
-        jLabel2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        getContentPane().add(jLabel2);
-        jLabel2.setBounds(20, 360, 140, 40);
+        btnDelete.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnDelete.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnDeleteMouseClicked(evt);
+            }
+        });
+        getContentPane().add(btnDelete);
+        btnDelete.setBounds(20, 360, 140, 40);
 
-        jLabel3.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        getContentPane().add(jLabel3);
-        jLabel3.setBounds(20, 440, 140, 40);
+        btnClear.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnClear.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnClearMouseClicked(evt);
+            }
+        });
+        getContentPane().add(btnClear);
+        btnClear.setBounds(20, 440, 140, 40);
 
-        jLabel4.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        getContentPane().add(jLabel4);
-        jLabel4.setBounds(440, 660, 70, 30);
+        btnFirst.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnFirst.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnFirstMouseClicked(evt);
+            }
+        });
+        getContentPane().add(btnFirst);
+        btnFirst.setBounds(440, 660, 70, 30);
 
-        jLabel5.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        getContentPane().add(jLabel5);
-        jLabel5.setBounds(540, 660, 70, 30);
+        btnPrevious.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnPrevious.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnPreviousMouseClicked(evt);
+            }
+        });
+        getContentPane().add(btnPrevious);
+        btnPrevious.setBounds(540, 660, 70, 30);
 
-        jLabel6.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        getContentPane().add(jLabel6);
-        jLabel6.setBounds(640, 660, 70, 30);
+        btnNext.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnNext.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnNextMouseClicked(evt);
+            }
+        });
+        getContentPane().add(btnNext);
+        btnNext.setBounds(640, 660, 70, 30);
 
-        jLabel7.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        getContentPane().add(jLabel7);
-        jLabel7.setBounds(740, 660, 60, 30);
+        btnLast.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnLast.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnLastMouseClicked(evt);
+            }
+        });
+        getContentPane().add(btnLast);
+        btnLast.setBounds(740, 660, 60, 30);
 
-        jLabel8.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        getContentPane().add(jLabel8);
-        jLabel8.setBounds(920, 140, 60, 40);
+        btnSearch.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnSearch.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnSearchMouseClicked(evt);
+            }
+        });
+        getContentPane().add(btnSearch);
+        btnSearch.setBounds(920, 140, 60, 40);
 
-        jLabel9.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        getContentPane().add(jLabel9);
-        jLabel9.setBounds(990, 10, 20, 20);
+        btnClose.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        getContentPane().add(btnClose);
+        btnClose.setBounds(990, 10, 20, 20);
 
-        jLabel10.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        getContentPane().add(jLabel10);
-        jLabel10.setBounds(20, 220, 140, 40);
+        btnAdd.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnAdd.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnAddMouseClicked(evt);
+            }
+        });
+        getContentPane().add(btnAdd);
+        btnAdd.setBounds(20, 220, 140, 40);
 
         Background.setIcon(new javax.swing.ImageIcon(getClass().getResource("/phongtro/image/quản lý chi tiêu.jpg"))); // NOI18N
         getContentPane().add(Background);
         Background.setBounds(0, 0, 1020, 710);
 
-        btnTimKiem.setText("Tìm Kiếm");
-        btnTimKiem.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnTimKiem.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnTimKiemActionPerformed(evt);
-            }
-        });
-        getContentPane().add(btnTimKiem);
-        btnTimKiem.setBounds(920, 140, 60, 40);
-
-        btnAdd.setText("Thêm");
-        btnAdd.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnAdd.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAddActionPerformed(evt);
-            }
-        });
-        getContentPane().add(btnAdd);
-        btnAdd.setBounds(22, 220, 140, 40);
-
-        btnEdit.setText("Sửa");
-        btnEdit.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnEdit.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnEditActionPerformed(evt);
-            }
-        });
-        getContentPane().add(btnEdit);
-        btnEdit.setBounds(24, 292, 140, 40);
-
-        btnDel.setText("Xóa");
-        btnDel.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnDel.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnDelActionPerformed(evt);
-            }
-        });
-        getContentPane().add(btnDel);
-        btnDel.setBounds(22, 362, 140, 50);
-
-        btnNew.setText("Mới");
-        btnNew.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnNew.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnNewActionPerformed(evt);
-            }
-        });
-        getContentPane().add(btnNew);
-        btnNew.setBounds(22, 440, 140, 40);
-
-        btnPre.setText("<");
-        btnPre.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnPre.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnPreActionPerformed(evt);
-            }
-        });
-        getContentPane().add(btnPre);
-        btnPre.setBounds(530, 660, 80, 32);
-
-        btnLongPre.setText("|<");
-        btnLongPre.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnLongPre.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnLongPreActionPerformed(evt);
-            }
-        });
-        getContentPane().add(btnLongPre);
-        btnLongPre.setBounds(440, 660, 70, 32);
-
-        btnNext.setText(">");
-        btnNext.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnNext.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnNextActionPerformed(evt);
-            }
-        });
-        getContentPane().add(btnNext);
-        btnNext.setBounds(640, 660, 70, 32);
-
-        btnLongNext.setText(">|");
-        btnLongNext.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnLongNext.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnLongNextActionPerformed(evt);
-            }
-        });
-        getContentPane().add(btnLongNext);
-        btnLongNext.setBounds(740, 660, 70, 32);
-
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
-        // TODO add your handling code here:
-        try {
-            Double.parseDouble(txtSoTien.getText());
-            insert();
-        } catch (Exception e) {
-            DialogHelper.alert(this, "Số tiền không hợp lệ");
-        }
-    }//GEN-LAST:event_btnAddActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         // TODO add your handling code here:
@@ -467,60 +403,60 @@ public class ChiUI extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_tblChiMouseClicked
 
-    private void btnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditActionPerformed
-        // TODO add your handling code here:
-        try {
-            Double.parseDouble(txtSoTien.getText());
-            update();
-        } catch (Exception e) {
-            DialogHelper.alert(this, "Số tiền không hợp lệ");
-        }
-    }//GEN-LAST:event_btnEditActionPerformed
-
-    private void btnDelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDelActionPerformed
-        // TODO add your handling code here:
-        delete();
-    }//GEN-LAST:event_btnDelActionPerformed
-
-    private void btnNewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNewActionPerformed
-        // TODO add your handling code here:
-        clear();
-    }//GEN-LAST:event_btnNewActionPerformed
-
-    private void btnLongPreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLongPreActionPerformed
-        // TODO add your handling code here:
-        this.index = 0;
-        this.edit();
-    }//GEN-LAST:event_btnLongPreActionPerformed
-
-    private void btnPreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPreActionPerformed
-        // TODO add your handling code here:
-        this.index--;
-        this.edit();
-    }//GEN-LAST:event_btnPreActionPerformed
-
-    private void btnNextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNextActionPerformed
-        // TODO add your handling code here:
-        this.index++;
-        this.edit();
-    }//GEN-LAST:event_btnNextActionPerformed
-
-    private void btnLongNextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLongNextActionPerformed
-        // TODO add your handling code here:
-        this.index = tblChi.getRowCount() - 1;
-        this.edit();
-    }//GEN-LAST:event_btnLongNextActionPerformed
-
-    private void btnTimKiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTimKiemActionPerformed
-        // TODO add your handling code here:
-        this.load();
-        this.clear();
-    }//GEN-LAST:event_btnTimKiemActionPerformed
-
     private void btnExitMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnExitMouseClicked
         // TODO add your handling code here:
         exit();
     }//GEN-LAST:event_btnExitMouseClicked
+
+    private void btnAddMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAddMouseClicked
+        // TODO add your handling code here:
+        insert();
+    }//GEN-LAST:event_btnAddMouseClicked
+
+    private void btnUpdateMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnUpdateMouseClicked
+        // TODO add your handling code here:
+        update();
+    }//GEN-LAST:event_btnUpdateMouseClicked
+
+    private void btnDeleteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDeleteMouseClicked
+        // TODO add your handling code here:
+        delete();
+    }//GEN-LAST:event_btnDeleteMouseClicked
+
+    private void btnClearMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnClearMouseClicked
+        // TODO add your handling code here:
+        clear();
+    }//GEN-LAST:event_btnClearMouseClicked
+
+    private void btnFirstMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnFirstMouseClicked
+        // TODO add your handling code here:
+        this.index = 0;
+        this.edit();
+    }//GEN-LAST:event_btnFirstMouseClicked
+
+    private void btnPreviousMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnPreviousMouseClicked
+        // TODO add your handling code here:
+        this.index--;
+        this.edit();
+    }//GEN-LAST:event_btnPreviousMouseClicked
+
+    private void btnNextMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnNextMouseClicked
+        // TODO add your handling code here:
+        this.index++;
+        this.edit();
+    }//GEN-LAST:event_btnNextMouseClicked
+
+    private void btnLastMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLastMouseClicked
+        // TODO add your handling code here:
+        this.index = tblChi.getRowCount() - 1;
+        this.edit();
+    }//GEN-LAST:event_btnLastMouseClicked
+
+    private void btnSearchMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSearchMouseClicked
+        // TODO add your handling code here:
+        this.load();
+        this.clear();
+    }//GEN-LAST:event_btnSearchMouseClicked
 
     /**
      * @param args the command line arguments
@@ -560,26 +496,17 @@ public class ChiUI extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Background;
-    private javax.swing.JButton btnAdd;
-    private javax.swing.JButton btnDel;
-    private javax.swing.JButton btnEdit;
+    private javax.swing.JLabel btnAdd;
+    private javax.swing.JLabel btnClear;
+    private javax.swing.JLabel btnClose;
+    private javax.swing.JLabel btnDelete;
     private javax.swing.JLabel btnExit;
-    private javax.swing.JButton btnLongNext;
-    private javax.swing.JButton btnLongPre;
-    private javax.swing.JButton btnNew;
-    private javax.swing.JButton btnNext;
-    private javax.swing.JButton btnPre;
-    private javax.swing.JButton btnTimKiem;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
+    private javax.swing.JLabel btnFirst;
+    private javax.swing.JLabel btnLast;
+    private javax.swing.JLabel btnNext;
+    private javax.swing.JLabel btnPrevious;
+    private javax.swing.JLabel btnSearch;
+    private javax.swing.JLabel btnUpdate;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable tblChi;

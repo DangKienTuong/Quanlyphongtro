@@ -20,7 +20,7 @@ public class runProgram {
                 if (i == 100) {
                     DangNhap login = new DangNhap();
                     login.setVisible(true);
-                    ho.setVisible(false);
+                    ho.dispose();
                 }
             }
 
