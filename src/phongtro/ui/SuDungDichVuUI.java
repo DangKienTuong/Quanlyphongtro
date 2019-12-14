@@ -96,9 +96,11 @@ public class SuDungDichVuUI extends javax.swing.JFrame {
     }
 
     void clear() {
-        Sudungdv model = new Sudungdv();
-        this.setModel(model);
-        setStatus(true);
+        List<Sudungdv> list = dao.selectByKeyword("");
+        int ide = (Integer) list.size() + 1;
+        txtMaSddv.setText("Masddv" + ide);
+        cboMaPhong.setSelectedIndex(0);
+        cboMaDv.setSelectedIndex(0);
     }
 
     void edit() {
@@ -107,7 +109,6 @@ public class SuDungDichVuUI extends javax.swing.JFrame {
             Sudungdv model = dao.findById(user);
             if (model != null) {
                 this.setModel(model);
-                this.setStatus(false);
             }
         } catch (Exception e) {
             DialogHelper.alert(this, "Lỗi truy vấn dữ liệu!");
@@ -117,25 +118,21 @@ public class SuDungDichVuUI extends javax.swing.JFrame {
     void setModel(Sudungdv model) {
         txtMaSddv.setText(model.getMaSuDungDV());
         cboMaPhong.setSelectedItem(model.getMaPhong());
-        cboMaDv.setSelectedItem(model.getMaDichVu());
+        DichvuDAO daoDichvu = new DichvuDAO();
+        Dichvu dichvuCast = new Dichvu();
+        dichvuCast = daoDichvu.findById(model.getMaDichVu());
+        cboMaDv.setSelectedItem(dichvuCast.getTenDichVu());
     }
 
     Sudungdv getModel() {
         Sudungdv model = new Sudungdv();
         model.setMaSuDungDV(txtMaSddv.getText());
         model.setMaPhong((String) cboMaPhong.getSelectedItem());
-        model.setMaDichVu((String) cboMaDv.getSelectedItem());
+        DichvuDAO daoDichvu = new DichvuDAO();
+        Dichvu dichvuCast = new Dichvu();
+        dichvuCast = daoDichvu.findByName((String) cboMaDv.getSelectedItem());
+        model.setMaDichVu(dichvuCast.getMaDichVu());
         return model;
-    }
-
-    void setStatus(boolean insertable) {
-        txtMaSddv.setEditable(insertable);
-        boolean first = this.index > 0;
-        boolean last = this.index < tblSddv.getRowCount() - 1;
-        btnLongPre.setEnabled(!insertable && first);
-        btnPre.setEnabled(!insertable && first);
-        btnNext.setEnabled(!insertable && last);
-        btnLongNext.setEnabled(!insertable && last);
     }
 
     void fillComboBox() {
@@ -156,7 +153,7 @@ public class SuDungDichVuUI extends javax.swing.JFrame {
             DichvuDAO sddvdao = new DichvuDAO();
             List<Dichvu> listsddv = sddvdao.select();
             for (Dichvu cd : listsddv) {
-                modelDv.addElement(cd.getMaDichVu());
+                modelDv.addElement(cd.getTenDichVu());
             }
         } catch (Exception e) {
             DialogHelper.alert(this, "Lỗi truy vấn dữ liệu!");
@@ -189,6 +186,8 @@ public class SuDungDichVuUI extends javax.swing.JFrame {
         btnSearch = new javax.swing.JLabel();
         btnClose = new javax.swing.JLabel();
         btnExit = new javax.swing.JLabel();
+        lblTenDv = new javax.swing.JLabel();
+        jTextField1 = new javax.swing.JTextField();
         Background = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -354,6 +353,17 @@ public class SuDungDichVuUI extends javax.swing.JFrame {
         getContentPane().add(btnExit);
         btnExit.setBounds(997, 10, 10, 19);
 
+        lblTenDv.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        lblTenDv.setForeground(new java.awt.Color(51, 51, 51));
+        lblTenDv.setText("Tên dịch vụ");
+        getContentPane().add(lblTenDv);
+        lblTenDv.setBounds(390, 320, 110, 24);
+
+        jTextField1.setBackground(new java.awt.Color(242, 246, 249));
+        jTextField1.setBorder(null);
+        getContentPane().add(jTextField1);
+        jTextField1.setBounds(390, 314, 120, 20);
+
         Background.setIcon(new javax.swing.ImageIcon(getClass().getResource("/phongtro/image/sử dụng dịch vụ từng phòng.jpg"))); // NOI18N
         getContentPane().add(Background);
         Background.setBounds(0, 0, 1020, 720);
@@ -365,7 +375,6 @@ public class SuDungDichVuUI extends javax.swing.JFrame {
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         // TODO add your handling code here:
         this.load();
-        this.setStatus(true);
         fillComboBox();
     }//GEN-LAST:event_formWindowOpened
 
@@ -486,6 +495,8 @@ public class SuDungDichVuUI extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> cboMaDv;
     private javax.swing.JComboBox<String> cboMaPhong;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTextField jTextField1;
+    private javax.swing.JLabel lblTenDv;
     private javax.swing.JTable tblSddv;
     private javax.swing.JTextField txtMaSddv;
     private javax.swing.JTextField txtTimKiem;

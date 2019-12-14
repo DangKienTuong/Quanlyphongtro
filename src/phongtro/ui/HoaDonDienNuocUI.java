@@ -423,12 +423,20 @@ public class HoaDonDienNuocUI extends javax.swing.JFrame {
 
     private void btnAddMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAddMouseClicked
         // TODO add your handling code here:
-        insert();
+        if (txtMaHoaDon.getText().startsWith("Mhdd") || txtMaHoaDon.getText().startsWith("Mhdn")) {
+            insert();
+        } else {
+            DialogHelper.alert(this, "Mã hóa đơn phải bắt đầu bằng Mhdd hoặc Mhdn");
+        }
     }//GEN-LAST:event_btnAddMouseClicked
 
     private void btnUpdateMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnUpdateMouseClicked
         // TODO add your handling code here:
-        update();
+        if (txtMaHoaDon.getText().startsWith("Mhdd") || txtMaHoaDon.getText().startsWith("Mhdn")) {
+            update();
+        } else {
+            DialogHelper.alert(this, "Mã hóa đơn phải bắt đầu bằng Mhdd hoặc Mhdn");
+        }
     }//GEN-LAST:event_btnUpdateMouseClicked
 
     private void btnDeleteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDeleteMouseClicked

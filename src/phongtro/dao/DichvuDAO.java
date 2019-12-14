@@ -61,6 +61,12 @@ public class DichvuDAO {
         return list.size() > 0 ? list.get(0) : null;
     }
 
+    public Dichvu findByName(String Madichvu) {
+        String sql = "SELECT * FROM Dichvu WHERE Tendichvu=?";
+        List<Dichvu> list = select(sql, Madichvu);
+        return list.size() > 0 ? list.get(0) : null;
+    }
+
     private List<Dichvu> select(String sql, Object... args) {
         List<Dichvu> list = new ArrayList<>();
         try {

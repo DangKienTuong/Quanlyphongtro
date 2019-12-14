@@ -121,6 +121,9 @@ public class KhachHangUI extends javax.swing.JFrame {
         this.setModel(model);
         setStatus(true);
         lbl_img.setIcon(null);
+        List<Khachhang> list = dao.selectByKeyword("");
+        int ide = (Integer) list.size() + 1;
+        txtMaKhachHang.setText("Makh0" + ide);
     }
 
     void edit() {

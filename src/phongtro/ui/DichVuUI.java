@@ -103,6 +103,9 @@ public class DichVuUI extends javax.swing.JFrame {
         this.setModel(model);
         setStatus(true);
         txtDonGia.setText("");
+        List<Dichvu> list = dao.selectByKeyword("");
+        int ide = (Integer) list.size() + 1;
+        txtMaDichVu.setText("DV0" + ide);
     }
 
     void edit() {

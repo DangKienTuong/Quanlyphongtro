@@ -104,7 +104,9 @@ public class HoaDonPhongUI extends javax.swing.JFrame {
     }
 
     void clear() {
-        txtMaHd.setText("");
+        List<Hoadonphong> list = dao.selectByKeyword("");
+        int ide = (Integer) list.size() + 1;
+        txtMaHd.setText("Mahdp" + ide);
         txtThangNam.setDate(null);
         txtNguoiDaiDien.setText("");
         cboMaPhong.setSelectedIndex(0);

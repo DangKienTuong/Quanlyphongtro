@@ -115,6 +115,9 @@ public class ChiUI extends javax.swing.JFrame {
         this.setModel(model);
         setStatus(true);
         txtSoTien.setText("");
+        List<Chi> list = dao.selectByKeyword("");
+        int ide = (Integer) list.size() + 1;
+        txtMaChi.setText("Mchi0" + ide);
     }
 
     void edit() {

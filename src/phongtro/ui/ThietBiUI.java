@@ -107,6 +107,9 @@ public class ThietBiUI extends javax.swing.JFrame {
         setStatus(true);
         txtSoLuong.setText("");
         txtGia.setText("");
+        List<Thietbi> list = dao.selectByKeyword("");
+        int ide = (Integer) list.size() + 1;
+        txtMaThietBi.setText("Mtb0" + ide);
     }
 
     void edit() {

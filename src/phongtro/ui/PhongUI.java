@@ -103,6 +103,9 @@ public class PhongUI extends javax.swing.JFrame {
         setStatus(true);
         txtDonGia.setText("");
         txtSoNguoiToiDa.setText("");
+        List<Phong> list = dao.selectByKeyword("");
+        int ide = (Integer) list.size() + 1;
+        txtMaPhong.setText("P0" + ide);
     }
 
     void edit() {

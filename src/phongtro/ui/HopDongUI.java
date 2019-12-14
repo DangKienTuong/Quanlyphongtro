@@ -108,6 +108,9 @@ public class HopDongUI extends javax.swing.JFrame {
         this.setModel(model);
         setStatus(true);
         txtTienDatCoc.setText("");
+        List<Hopdong> list = dao.selectByKeyword("");
+        int ide = (Integer) list.size() + 1;
+        txtMaHopDong.setText("hopdong" + ide);
     }
 
     void edit() {
