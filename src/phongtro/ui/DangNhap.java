@@ -265,7 +265,6 @@ public class DangNhap extends javax.swing.JFrame {
         if (txtPass.getText().equalsIgnoreCase("Password")) {
             txtPass.setEchoChar('*');
             txtPass.setText("");
-            txtPass.setForeground(Color.BLACK);
         }
     }//GEN-LAST:event_txtPassFocusGained
 
@@ -274,7 +273,6 @@ public class DangNhap extends javax.swing.JFrame {
         if (txtPass.getText().equalsIgnoreCase("")) {
             txtPass.setEchoChar((char) 0);
             txtPass.setText("Password");
-            txtPass.setForeground(new Color(102, 102, 102));
         }
     }//GEN-LAST:event_txtPassFocusLost
 
@@ -282,7 +280,6 @@ public class DangNhap extends javax.swing.JFrame {
         // TODO add your handling code here:
         if (txtUser.getText().equalsIgnoreCase("Username")) {
             txtUser.setText("");
-            txtUser.setForeground(Color.BLACK);
         }
     }//GEN-LAST:event_txtUserFocusGained
 
@@ -290,7 +287,6 @@ public class DangNhap extends javax.swing.JFrame {
         // TODO add your handling code here:
         if (txtUser.getText().equalsIgnoreCase("")) {
             txtUser.setText("Username");
-            txtUser.setForeground(new Color(102, 102, 102));
         }
     }//GEN-LAST:event_txtUserFocusLost
 
